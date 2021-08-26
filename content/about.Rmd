@@ -14,7 +14,7 @@ Randi Bolt is an undergraduate mathematics and statistics major at Portland Stat
 
 # Projects 
 
-**:blue_book: Organ Donation Pamphlet** <br> September 2021 - December 2021 <br> 
+**:blue_book: Organ Donation Pamphlet** <br> September 2021 - December 2021 <br> _Portland State University_ 
 
 * TBD
 
@@ -59,18 +59,36 @@ Randi Bolt is an undergraduate mathematics and statistics major at Portland Stat
 
 * Processed invoices in Quickbooks, consolidated bills, and assisted with monthly financial reporting and filing.
 
-:no_entry_sign: Sheet Metal Company 
+**:no_entry_sign: Sheet Metal Company** <br> August 2016 - April 2017 <br> _General Accountant / Accounts Payable / Office Administrator_
+
+* Used Sage to process, code, triage and track over 50 new invoices daily.
+
+* Consolidated company credit cards up to $60,000 and monthly statements ranging from under $10 to over $3 million. 
+
+* Pioneered and coordinated paperless invoice by updating processes with the CFO, TimberScan for Sage, project managers, and project assistants in charge of change orders. 
+
+* Compiled, organized, and formatted both paper and electronic billings on million dollar projects such as Intel and OSHA Center for Health and Healing. 
+
+* Used Microsoft products to process and electronically filled tool reports of about 500 rows weekly, reimbursements, packing slips, and time cards of about 40 employees. 
+
+* Delivered over 100 weekly vendor payments of up to a million dollars weekly via check, credit card, and direct deposit, with extra attention to payment terms, which reduced company costs by $20 to $3,000 on a weekly basis. 
+
+* Provided regular support throughout the 6 main divisions of the company with contracts, change orders, project budgets, company spending, and training new hires. 
 
 # Volunteer Experience 
 
-:sparkle: Missing Maps 
+**:sparkle: Missing Maps** <br> November 2020 - March 2021 <br> _Cartographer_
+
+* Mapped buildings and roads off satellite images with openstreetmap during virtual mapathons. 
+
+* Viewed over 25,000 aerial images to verify if there were mappable features or obstructions such as clouds. 
 
 # Professional Organizations 
 
-:earth_americas: ASPRS 
+:earth_americas:  American Society for Photogrammetry and Remote Sensing (ASPRS) 
 
-:globe_with_meridians: ISPRS 
+:globe_with_meridians: International Society for Photogrammetry and Remote Sensing (ISPRS)
 
-:satellite: URISA 
+:satellite: Oregon Urban and Regional Information Systems Association (ORURISA)
 
-:cocktail: PDXWIT
+:cocktail: Portland Women in Technology (PDXWIT)
