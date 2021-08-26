@@ -1,6 +1,6 @@
 baseurl: "https://rbolt.netlify.app/"
 languageCode: "en-us"
-title: "A minimal Hugo website"
+title: "Randi Bolt's Website"
 theme: "hugo-xmin"
 enableEmoji : true
 googleAnalytics: ""
