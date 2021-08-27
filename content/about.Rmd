@@ -4,8 +4,11 @@ date: "8/26/2021"
 output: html_document
 enableEmoji : true
 ---
+
+Note : This page is out of date, and reflective of a resume I made for a specific job back in March of 2021. Update coming soon ...
+
 ## About 
-Randi Bolt is an undergraduate mathematics and statistics major at Portland State University. 
+Randi Bolt is an undergraduate mathematics and statistics major at Portland State University.
 
 ## Education 
 **:mortar_board: Bachelor of Science in Mathematics and Statistics** <br>  Expected Graduation June 2022 <br> _Portland State University_ 
