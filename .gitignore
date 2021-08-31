@@ -37,3 +37,6 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# US Census Data
+ignore/content/post/2021-08-30-tidycensus-package/secret/
