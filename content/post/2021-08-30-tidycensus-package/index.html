@@ -1,5 +1,5 @@
 ---
-title: Using the tidycensus package in R
+title: Using API's and tidycensus 
 author: Randi Bolt
 date: '2021-08-30'
 slug: tidycensus-package
@@ -9,13 +9,77 @@ tags:
   - data
   - rstudio
   - tutorial
-draft: true
+  - api keys
+  - population
+  - census
 ---
 
 <script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
 
-<ol style="list-style-type: decimal">
-<li>Register an API key at <a href="http://api.census.gov/data/key_signup.html" class="uri">http://api.census.gov/data/key_signup.html</a></li>
-</ol>
-<pre class="r"><code>library(tidycensus)</code></pre>
+<ul>
+<li><p>Register an API key at <a href="http://api.census.gov/data/key_signup.html" class="uri">http://api.census.gov/data/key_signup.html</a></p></li>
+<li><p>Create a .Renviron file in the main directory with “KEY=XXXXXXXXXXX”.</p></li>
+</ul>
+<p>Note: this will not work with spaces on either side of the equal sign.</p>
+<p>Also note: tidycensus already has this utility worked into it (read ?census_api_key). They call their api key CENSUS_API_KEY (it is common for this key to be in all caps), so that is what I also called mine. This will be especially helpful in not mixing up API keys if I use other API keys in the future.</p>
+<pre class="r"><code>library(tidycensus)
+# First time, reload your environment so you can use the key without restarting R.
+# .../ tells the machine to go one folder outside the folder it is in
+readRenviron(&quot;../../../.Renviron&quot;)
+# You can check it with:
+# Sys.getenv(&quot;CENSUS_API_KEY&quot;)</code></pre>
+<ul>
+<li>load variables with load_variables(year, dataset, chache=T/F)</li>
+</ul>
+<p>Read ?load_variables for various datasets and more information.</p>
+<p>Note that <strong>label</strong> shows the estimates by total, and then sex and age range. <strong>concept</strong> is by sex, then race, origins, and ancestry.</p>
+<pre class="r"><code>v15 &lt;- load_variables(2019, &quot;acs1&quot;)
+v15</code></pre>
+<pre><code>## # A tibble: 35,528 x 3
+##    name       label                                    concept   
+##    &lt;chr&gt;      &lt;chr&gt;                                    &lt;chr&gt;     
+##  1 B01001_001 Estimate!!Total:                         SEX BY AGE
+##  2 B01001_002 Estimate!!Total:!!Male:                  SEX BY AGE
+##  3 B01001_003 Estimate!!Total:!!Male:!!Under 5 years   SEX BY AGE
+##  4 B01001_004 Estimate!!Total:!!Male:!!5 to 9 years    SEX BY AGE
+##  5 B01001_005 Estimate!!Total:!!Male:!!10 to 14 years  SEX BY AGE
+##  6 B01001_006 Estimate!!Total:!!Male:!!15 to 17 years  SEX BY AGE
+##  7 B01001_007 Estimate!!Total:!!Male:!!18 and 19 years SEX BY AGE
+##  8 B01001_008 Estimate!!Total:!!Male:!!20 years        SEX BY AGE
+##  9 B01001_009 Estimate!!Total:!!Male:!!21 years        SEX BY AGE
+## 10 B01001_010 Estimate!!Total:!!Male:!!22 to 24 years  SEX BY AGE
+## # … with 35,518 more rows</code></pre>
+<p>Let’s only focus on the first line for now, “B01001_001” which should be the total estimates. Then we can use get_acs() to get data population data by state from the American Community Survey.</p>
+<pre class="r"><code>get_acs(geography = &quot;state&quot;, year = 2019, variable = &quot;B01001_001&quot;)</code></pre>
+<pre><code>## Getting data from the 2015-2019 5-year ACS</code></pre>
+<pre><code>## # A tibble: 52 x 5
+##    GEOID NAME                 variable   estimate   moe
+##    &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;
+##  1 01    Alabama              B01001_001  4876250    NA
+##  2 02    Alaska               B01001_001   737068    NA
+##  3 04    Arizona              B01001_001  7050299    NA
+##  4 05    Arkansas             B01001_001  2999370    NA
+##  5 06    California           B01001_001 39283497    NA
+##  6 08    Colorado             B01001_001  5610349    NA
+##  7 09    Connecticut          B01001_001  3575074    NA
+##  8 10    Delaware             B01001_001   957248    NA
+##  9 11    District of Columbia B01001_001   692683    NA
+## 10 12    Florida              B01001_001 20901636    NA
+## # … with 42 more rows</code></pre>
+<p>We can get similar population estimates setting the variable = c(“POP), with get_estimates. As well as”DENSITY”; for housing unit estimates, c(“HUEST”); and for components of change estimates, c(“BIRTHS”, “DEATHS”, “DOMESTICMIG”, “INTERNATIONALMIG”, “NATURALINC”, “NETMIG”, “RBIRTH”, “RDEATH”, “RDOMESTICMIG”, “RINTERNATIONALMIG”, “RNATURALINC”, “RNETMIG”).</p>
+<pre class="r"><code>get_estimates(geography = &quot;state&quot;, year = 2019, variable = c(&quot;POP&quot;))</code></pre>
+<pre><code>## # A tibble: 52 x 4
+##    NAME           GEOID variable    value
+##    &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1 Mississippi    28    POP       2976149
+##  2 Missouri       29    POP       6137428
+##  3 Montana        30    POP       1068778
+##  4 Nebraska       31    POP       1934408
+##  5 Nevada         32    POP       3080156
+##  6 New Hampshire  33    POP       1359711
+##  7 New Jersey     34    POP       8882190
+##  8 New Mexico     35    POP       2096829
+##  9 New York       36    POP      19453561
+## 10 North Carolina 37    POP      10488084
+## # … with 42 more rows</code></pre>

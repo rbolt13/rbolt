@@ -1,5 +1,5 @@
 ---
-title: Using the tidycensus package in R
+title: Using API's and tidycensus 
 author: Randi Bolt
 date: '2021-08-30'
 slug: tidycensus-package
@@ -9,12 +9,50 @@ tags:
   - data
   - rstudio
   - tutorial
-draft: true
+  - api keys
+  - population
+  - census
 ---
 
-1. Register an API key at http://api.census.gov/data/key_signup.html 
+* Register an API key at http://api.census.gov/data/key_signup.html 
+
+* Create a .Renviron file in the main directory with "KEY=XXXXXXXXXXX". 
+
+Note: this will not work with spaces on either side of the equal sign. 
+
+Also note: tidycensus already has this utility worked into it (read ?census_api_key). They call their api key CENSUS_API_KEY (it is common for this key to be in all caps), so that is what I also called mine. This will be especially helpful in not mixing up API keys if I use other API keys in the future. 
 
 ```{r}
 library(tidycensus)
-
+# First time, reload your environment so you can use the key without restarting R.
+# .../ tells the machine to go one folder outside the folder it is in
+readRenviron("../../../.Renviron")
+# You can check it with:
+# Sys.getenv("CENSUS_API_KEY")
 ```
+
+* load variables with load_variables(year, dataset, chache=T/F)
+
+Read ?load_variables for various datasets and more information. 
+
+Note that **label** shows the estimates by total, and then sex and age range. **concept** is by sex, then race, origins, and ancestry.  
+
+```{r}
+v15 <- load_variables(2019, "acs1")
+v15
+```
+
+Let's only focus on the first line for now, "B01001_001" which should be the total estimates. Then we can use get_acs() to get data population data by state from the American Community Survey.
+
+```{r}
+get_acs(geography = "state", year = 2019, variable = "B01001_001")
+```
+
+
+We can get similar population estimates setting the variable = c("POP), with get_estimates. As well as "DENSITY"; for housing unit estimates, c("HUEST"); and for components of change estimates, c("BIRTHS", "DEATHS", "DOMESTICMIG", "INTERNATIONALMIG", "NATURALINC", "NETMIG", "RBIRTH", "RDEATH", "RDOMESTICMIG", "RINTERNATIONALMIG", "RNATURALINC", "RNETMIG").
+
+
+```{r}
+get_estimates(geography = "state", year = 2019, variable = c("POP"))
+```
+

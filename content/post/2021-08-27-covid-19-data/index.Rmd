@@ -11,7 +11,7 @@ tags:
   - covid
   - data
   - data visualisation
-draft: true
+draft: TRUE
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
