@@ -9,4 +9,12 @@ tags:
   - data
   - rstudio
   - tutorial
+draft: true
 ---
+
+1. Register an API key at http://api.census.gov/data/key_signup.html 
+
+```{r}
+library(tidycensus)
+
+```
