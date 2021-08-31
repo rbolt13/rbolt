@@ -10,7 +10,7 @@ tags:
   - notes
   - R for Data Science
   - data visualisation
-draft: true 
+draft: true
 ---
 ```{r setup, include=FALSE} 
 # this chunk removes waring messages
