@@ -83,3 +83,18 @@ v15</code></pre>
 ##  9 New York       36    POP      19453561
 ## 10 North Carolina 37    POP      10488084
 ## # … with 42 more rows</code></pre>
+<pre class="r"><code>get_estimates(geography = &quot;county&quot;, state = &quot;OR&quot;, year = 2019, variable = c(&quot;POP&quot;))</code></pre>
+<pre><code>## # A tibble: 36 x 4
+##    NAME                      GEOID variable  value
+##    &lt;chr&gt;                     &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+##  1 Jackson County, Oregon    41029 POP      220944
+##  2 Grant County, Oregon      41023 POP        7199
+##  3 Clackamas County, Oregon  41005 POP      418187
+##  4 Tillamook County, Oregon  41057 POP       27036
+##  5 Josephine County, Oregon  41033 POP       87487
+##  6 Umatilla County, Oregon   41059 POP       77950
+##  7 Columbia County, Oregon   41009 POP       52354
+##  8 Wasco County, Oregon      41065 POP       26682
+##  9 Lane County, Oregon       41039 POP      382067
+## 10 Washington County, Oregon 41067 POP      601592
+## # … with 26 more rows</code></pre>

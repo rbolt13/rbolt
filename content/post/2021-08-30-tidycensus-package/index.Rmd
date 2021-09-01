@@ -54,5 +54,6 @@ We can get similar population estimates setting the variable = c("POP), with get
 
 ```{r}
 get_estimates(geography = "state", year = 2019, variable = c("POP"))
+get_estimates(geography = "county", state = "OR", year = 2019, variable = c("POP"))
 ```
 

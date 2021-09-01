@@ -13,7 +13,7 @@ tags:
 draft: true
 ---
 ```{r setup, include=FALSE} 
-# this chunk removes waring messages
+# this chunk removes warning messages
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 ```
 

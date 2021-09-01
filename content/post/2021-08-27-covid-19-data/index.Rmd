@@ -11,7 +11,6 @@ tags:
   - covid
   - data
   - data visualisation
-draft: TRUE
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
@@ -22,14 +21,16 @@ library(tidyr)
 library(lubridate)
 library(pander)
 library(ggplot2)
-library(scales) #commas 
+library(scales) #percentages in tables
 library(gt) #format tables
 library(gridExtra) # grid.arrange
+library(tidycensus) # population data
+readRenviron("../../../.Renviron")
 ```
 
 ## Background and Data
 
-COVID-19 is causing havoc in Oregon once again, and as numbers continue to spike and school draws closer and closer, I decided it would be the perfect time to revisit one the of the first projects I worked on in R Studio. That project can be seen [here](https://rbolt13.github.io/rsite/covid.html), and used data from Johns Hopkins. This investigation will use data from the NY times that has more current updates. The repository for the NY Times data can be found [here](https://github.com/nytimes/covid-19-data), and the datasets that are being included are : 
+COVID-19 is causing havoc in Oregon once again, and as numbers continue to spike, I decided to revisit one the of the first projects I worked on in R Studio. That project can be seen [here](https://rbolt13.github.io/rsite/covid.html), and used data from Johns Hopkins. However, because that data is no longer updated this investigation will use data from the NY times that has more current data. The repository for the NY Times data can be found [here](https://github.com/nytimes/covid-19-data), and the datasets that are being included are : 
 
 1. **us.states** : state level data (file description [here](https://github.com/nytimes/covid-19-data/blob/master/README.md))
 
@@ -54,42 +55,118 @@ vacc <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_t
 policytrackerOR <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/govex_data/data_tables/policy_data/table_data/Current/Oregon_policy.csv")
 ```
 
-# Wrangling the Data
-The data set is already in long form (the dates are in rows instead of columns), and the date is already saved as a date variable. Therefore the main tasks here are to join the us.states data set with the vaccination records. 
+Additionally this project will use population data from the tidycensus package which I discuss more about how I got this data in a blog post [here](https://rbolt.netlify.app/post/2021/08/30/tidycensus-package/). Note that this data is from 2019, which is a couple years older than the COVID data. 
 
 ```{r}
+state.est <- get_estimates(geography = "state", year = 2019, variable = c("POP"))
+or.county.est <- get_estimates(geography = "county", state = "OR", year = 2019, variable = c("POP"))
+# pre clean to remove " County, Oregon" from the county name (this will make joining later easier)
+or.county.est$NAME <- gsub(" County, Oregon", "", or.county.est$NAME )
+head(state.est)
+head(or.county.est)
+```
+
+# Wrangling the Data
+The COVID data set is already in long form (meaning the dates are in rows instead of columns), and the date is already saved as a date variable. Therefore the main tasks here are to join the us.states data set with the vaccination records, and population estimates. Then join the us.states.vacc with the population data and create new percentage columns. 
+
+```{r}
+# states join with vacc
 us.states.vacc <- us.states %>%
   select(date, state, cases, deaths) %>%
   full_join(vacc %>%
               select(Province_State, Date, Lat, Long_, People_Fully_Vaccinated, People_Partially_Vaccinated),
-            by = c("state"="Province_State", "date"="Date"))
+            by = c("state"="Province_State", "date"="Date")) %>%
+  select(date, state, cases, deaths, People_Fully_Vaccinated, People_Partially_Vaccinated) %>% # join with census population data 
+  full_join(state.est %>% 
+              select(NAME, value),
+            by = c("state"="NAME")) %>%
+  summarise(date = date,
+            state = state,
+            population = value,
+            cases = cases,
+            perc.cases = cases/population,
+            deaths = deaths,
+            perc.deaths = deaths/population,
+            full.vacc = People_Fully_Vaccinated,
+            full.vacc.perc = full.vacc/population,
+            part.vacc = People_Partially_Vaccinated,
+            part.vacc.perc = part.vacc/population)
 head(us.states.vacc, n=5)
 ```
 
 Note: People_Fully_Vaccinated and People_Partially_Vaccinated show as NA because of the dates displayed were before the vaccine was released.
 
+Next, to filter out Oregon from the counties data, and join with the population data per county. 
+```{r}
+# select only oregon counties, and join with population
+or.covid.est <- us.counties %>%
+  filter(state == "Oregon") %>%
+  select(date, county, cases, deaths) %>%
+  full_join(or.county.est %>%
+              select(NAME, value),
+            by = c("county"="NAME"))%>% 
+  summarise(date = date,
+            county = county,
+            population = value,
+            cases = cases,
+            cases.perc = cases/population,
+            deaths = deaths,
+            deaths.perc = deaths/population) 
+head(or.covid.est, n=10)
+```
+
 ---
-Can I find population data? 
 
 # Using the data
 ```{r}
-us.states.vacc %>%
-  filter(date == "2021-08-29") %>%
-  arrange(desc(cases))
+# head(us.states.vacc %>%
+#        filter(date == "2021-08-30") %>%
+#   arrange(desc(perc.cases)), n=10)
+# 
+# us.states.vacc %>%
+#   filter(date == "2021-08-30") %>%
+#   arrange(!desc(full.vacc.perc)
+
+or.covid.est %>%
+  filter(date =="2021-08-30") %>%
+  arrange(desc(cases.perc))
+
+or.covid.est %>%
+  filter(date =="2021-08-30") %>%
+  arrange(desc(deaths.perc))
 ```
 
 
+Next to look at the data for Oregon Counties, by filter the most recent date, which as of this being written is **August 30th, 2021**, and then look at the top five Oregon counties with :
 
+* the highest number of cases
 
+* the highest percentage of cases per county 
+
+* the highest number of deaths
+
+* the highest death percentage 
 
 ```{r}
-us.states.vacc %>%
-  filter(state == "Oregon") %>%
-  arrange(desc(cases, date))
-
+# cases 
+head(or.covid.est %>%
+  filter(date =="2021-08-30") %>%
+  arrange(desc(cases)), n=5)
+# case percentage
+head(or.covid.est %>%
+  filter(date =="2021-08-30") %>%
+  arrange(desc(cases.perc)), n=5)
+# deaths
+head(or.covid.est %>%
+  filter(date =="2021-08-30") %>%
+  arrange(desc(deaths)), n=5)
+# death percentage
+head(or.covid.est %>%
+  filter(date =="2021-08-30") %>%
+  arrange(desc(deaths.perc)), n=5)
 ```
 
-
+To do : make nice tables and make some notes
 
 
 
