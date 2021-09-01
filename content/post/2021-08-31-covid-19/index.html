@@ -1,0 +1,231 @@
+---
+title: 'COVID-19 Data '
+author: Randi Bolt
+date: '2021-08-31'
+slug: covid-19
+categories:
+  - data
+  - rstudio
+tags:
+  - rstudio
+  - covid
+  - data
+  - census
+draft: true
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="background-and-data" class="section level2">
+<h2>Background and Data</h2>
+<p>COVID-19 is causing havoc in Oregon once again, and as numbers continue to spike, I decided to revisit one the of the first projects I worked on in R Studio. That project can be seen <a href="https://rbolt13.github.io/rsite/covid.html">here</a>, and used data from Johns Hopkins. However, because that data is no longer updated this investigation will use data from the NY times that has more current data. The repository for the NY Times data can be found <a href="https://github.com/nytimes/covid-19-data">here</a>, and the datasets that are being included are :</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>us.states</strong> : state level data (file description <a href="https://github.com/nytimes/covid-19-data/blob/master/README.md">here</a>)</p></li>
+<li><p><strong>us.counties</strong> : county-level data (file description <a href="https://github.com/nytimes/covid-19-data/blob/master/README.md">here</a>)</p></li>
+<li><p><strong>colleges</strong> : number of reported cases among students and employees at American colleges and universities, updated May 26th (file description <a href="https://github.com/nytimes/covid-19-data/tree/master/colleges">here</a>)</p></li>
+<li><p><strong>mask_use</strong> : survey between July 2 and July 14 (2020) where participants were asked, <em>“How oftern do you wear a mask in public when you expect to be within six feet of another person?”</em> (file description <a href="https://github.com/nytimes/covid-19-data/tree/master/mask-use">here</a>)</p></li>
+<li><p><strong>vacc</strong>: state level COVID-19 daily vaccination numbers time series data from the Johns Hopkins University repository (file description <a href="https://github.com/govex/COVID-19/blob/master/data_tables/vaccine_data/us_data/readme.md">here</a>)</p></li>
+<li><p><strong>policytrackerOR</strong>: dates and description of policies going into/out of effect in Oregon. To load data for a particular state go to <a href="https://github.com/govex/COVID-19/tree/govex_data/data_tables/policy_data/table_data/Current">here</a>, find the name of the state file you want to work with.</p></li>
+</ol>
+<p>Here is the data :</p>
+<pre class="r"><code>us.states &lt;- read_csv(&#39;https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv&#39;)
+us.counties &lt;- read_csv(&#39;https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv&#39;)
+colleges &lt;- read_csv(&#39;https://raw.githubusercontent.com/nytimes/covid-19-data/master/colleges/colleges.csv&#39;)
+mask_use &lt;- read_csv(&#39;https://raw.githubusercontent.com/nytimes/covid-19-data/master/colleges/colleges.csv&#39;)
+vacc &lt;- read_csv(&quot;https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/people_vaccinated_us_timeline.csv&quot;)
+policytrackerOR &lt;- read_csv(&quot;https://raw.githubusercontent.com/govex/COVID-19/govex_data/data_tables/policy_data/table_data/Current/Oregon_policy.csv&quot;)</code></pre>
+<p>Additionally this project will use population data from the tidycensus package which I discuss more about how I got this data in a blog post <a href="https://rbolt.netlify.app/post/2021/08/30/tidycensus-package/">here</a>. Note that this data is from 2019, which is a couple years older than the COVID data.</p>
+<pre class="r"><code>state.est &lt;- get_estimates(geography = &quot;state&quot;, year = 2019, variable = c(&quot;POP&quot;))
+or.county.est &lt;- get_estimates(geography = &quot;county&quot;, state = &quot;OR&quot;, year = 2019, variable = c(&quot;POP&quot;))
+# pre clean to remove &quot; County, Oregon&quot; from the county name (this will make joining later easier)
+or.county.est$NAME &lt;- gsub(&quot; County, Oregon&quot;, &quot;&quot;, or.county.est$NAME )
+head(state.est)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   NAME          GEOID variable   value
+##   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+## 1 Mississippi   28    POP      2976149
+## 2 Missouri      29    POP      6137428
+## 3 Montana       30    POP      1068778
+## 4 Nebraska      31    POP      1934408
+## 5 Nevada        32    POP      3080156
+## 6 New Hampshire 33    POP      1359711</code></pre>
+<pre class="r"><code>head(or.county.est)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   NAME      GEOID variable  value
+##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+## 1 Jackson   41029 POP      220944
+## 2 Grant     41023 POP        7199
+## 3 Clackamas 41005 POP      418187
+## 4 Tillamook 41057 POP       27036
+## 5 Josephine 41033 POP       87487
+## 6 Umatilla  41059 POP       77950</code></pre>
+</div>
+<div id="wrangling-the-data" class="section level1">
+<h1>Wrangling the Data</h1>
+<p>The COVID data set is already in long form (meaning the dates are in rows instead of columns), and the date is already saved as a date variable. Therefore the main tasks here are to join the us.states data set with the vaccination records, and population estimates. Then join the us.states.vacc with the population data and create new percentage columns.</p>
+<pre class="r"><code># states join with vacc
+us.states.vacc &lt;- us.states %&gt;%
+  select(date, state, cases, deaths) %&gt;%
+  full_join(vacc %&gt;%
+              select(Province_State, Date, Lat, Long_, People_Fully_Vaccinated, People_Partially_Vaccinated),
+            by = c(&quot;state&quot;=&quot;Province_State&quot;, &quot;date&quot;=&quot;Date&quot;)) %&gt;%
+  select(date, state, cases, deaths, People_Fully_Vaccinated, People_Partially_Vaccinated) %&gt;% # join with census population data 
+  full_join(state.est %&gt;% 
+              select(NAME, value),
+            by = c(&quot;state&quot;=&quot;NAME&quot;)) %&gt;%
+  summarise(date = date,
+            state = state,
+            population = value,
+            cases = cases,
+            perc.cases = cases/population,
+            deaths = deaths,
+            perc.deaths = deaths/population,
+            full.vacc = People_Fully_Vaccinated,
+            full.vacc.perc = full.vacc/population,
+            part.vacc = People_Partially_Vaccinated,
+            part.vacc.perc = part.vacc/population)
+head(us.states.vacc, n=5)</code></pre>
+<pre><code>## # A tibble: 5 x 11
+##   date       state     population cases  perc.cases deaths perc.deaths full.vacc
+##   &lt;date&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+## 1 2020-01-21 Washingt…    7614893     1     1.31e-7      0           0        NA
+## 2 2020-01-22 Washingt…    7614893     1     1.31e-7      0           0        NA
+## 3 2020-01-23 Washingt…    7614893     1     1.31e-7      0           0        NA
+## 4 2020-01-24 Illinois    12671821     1     7.89e-8      0           0        NA
+## 5 2020-01-24 Washingt…    7614893     1     1.31e-7      0           0        NA
+## # … with 3 more variables: full.vacc.perc &lt;dbl&gt;, part.vacc &lt;dbl&gt;,
+## #   part.vacc.perc &lt;dbl&gt;</code></pre>
+<p>Note: People_Fully_Vaccinated and People_Partially_Vaccinated show as NA because of the dates displayed were before the vaccine was released.</p>
+<p>Next, to filter out Oregon from the counties data, and join with the population data per county.</p>
+<pre class="r"><code># select only oregon counties, and join with population
+or.covid.est &lt;- us.counties %&gt;%
+  filter(state == &quot;Oregon&quot;) %&gt;%
+  select(date, county, cases, deaths) %&gt;%
+  full_join(or.county.est %&gt;%
+              select(NAME, value),
+            by = c(&quot;county&quot;=&quot;NAME&quot;))%&gt;% 
+  summarise(date = date,
+            county = county,
+            population = value,
+            cases = cases,
+            cases.perc = cases/population,
+            deaths = deaths,
+            deaths.perc = deaths/population) 
+head(or.covid.est, n=10)</code></pre>
+<pre><code>## # A tibble: 10 x 7
+##    date       county     population cases cases.perc deaths deaths.perc
+##    &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
+##  1 2020-02-28 Washington     601592     1 0.00000166      0           0
+##  2 2020-02-29 Washington     601592     1 0.00000166      0           0
+##  3 2020-03-01 Washington     601592     2 0.00000332      0           0
+##  4 2020-03-02 Washington     601592     2 0.00000332      0           0
+##  5 2020-03-03 Washington     601592     2 0.00000332      0           0
+##  6 2020-03-04 Washington     601592     2 0.00000332      0           0
+##  7 2020-03-05 Washington     601592     2 0.00000332      0           0
+##  8 2020-03-06 Washington     601592     2 0.00000332      0           0
+##  9 2020-03-07 Jackson        220944     2 0.00000905      0           0
+## 10 2020-03-07 Klamath         68238     1 0.0000147       0           0</code></pre>
+<hr />
+</div>
+<div id="using-the-data" class="section level1">
+<h1>Using the data</h1>
+<pre class="r"><code># head(us.states.vacc %&gt;%
+#        filter(date == &quot;2021-08-30&quot;) %&gt;%
+#   arrange(desc(perc.cases)), n=10)
+# 
+# us.states.vacc %&gt;%
+#   filter(date == &quot;2021-08-30&quot;) %&gt;%
+#   arrange(!desc(full.vacc.perc)
+
+or.covid.est %&gt;%
+  filter(date ==&quot;2021-08-30&quot;) %&gt;%
+  arrange(desc(cases.perc))</code></pre>
+<pre><code>## # A tibble: 36 x 7
+##    date       county    population cases cases.perc deaths deaths.perc
+##    &lt;date&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
+##  1 2021-08-30 Umatilla       77950 11476     0.147     117    0.00150 
+##  2 2021-08-30 Malheur        30571  4078     0.133      66    0.00216 
+##  3 2021-08-30 Morrow         11603  1546     0.133      20    0.00172 
+##  4 2021-08-30 Jefferson      24658  2850     0.116      45    0.00182 
+##  5 2021-08-30 Grant           7199   652     0.0906      8    0.00111 
+##  6 2021-08-30 Baker          16124  1401     0.0869     19    0.00118 
+##  7 2021-08-30 Union          26835  2312     0.0862     31    0.00116 
+##  8 2021-08-30 Marion        347818 28766     0.0827    356    0.00102 
+##  9 2021-08-30 Klamath        68238  5635     0.0826     82    0.00120 
+## 10 2021-08-30 Jackson       220944 18228     0.0825    202    0.000914
+## # … with 26 more rows</code></pre>
+<pre class="r"><code>or.covid.est %&gt;%
+  filter(date ==&quot;2021-08-30&quot;) %&gt;%
+  arrange(desc(deaths.perc))</code></pre>
+<pre><code>## # A tibble: 36 x 7
+##    date       county     population cases cases.perc deaths deaths.perc
+##    &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
+##  1 2021-08-30 Malheur         30571  4078     0.133      66     0.00216
+##  2 2021-08-30 Jefferson       24658  2850     0.116      45     0.00182
+##  3 2021-08-30 Morrow          11603  1546     0.133      20     0.00172
+##  4 2021-08-30 Gilliam          1912   123     0.0643      3     0.00157
+##  5 2021-08-30 Umatilla        77950 11476     0.147     117     0.00150
+##  6 2021-08-30 Hood River      23382  1477     0.0632     35     0.00150
+##  7 2021-08-30 Harney           7393   595     0.0805     11     0.00149
+##  8 2021-08-30 Wasco           26682  2061     0.0772     37     0.00139
+##  9 2021-08-30 Josephine       87487  7172     0.0820    109     0.00125
+## 10 2021-08-30 Crook           24404  1769     0.0725     30     0.00123
+## # … with 26 more rows</code></pre>
+<p>Next to look at the data for Oregon Counties, by filter the most recent date, which as of this being written is <strong>August 30th, 2021</strong>, and then look at the top five Oregon counties with :</p>
+<ul>
+<li><p>the highest number of cases</p></li>
+<li><p>the highest percentage of cases per county</p></li>
+<li><p>the highest number of deaths</p></li>
+<li><p>the highest death percentage</p></li>
+</ul>
+<pre class="r"><code># cases 
+head(or.covid.est %&gt;%
+  filter(date ==&quot;2021-08-30&quot;) %&gt;%
+  arrange(desc(cases)), n=5)</code></pre>
+<pre><code>## # A tibble: 5 x 7
+##   date       county     population cases cases.perc deaths deaths.perc
+##   &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
+## 1 2021-08-30 Multnomah      812855 47097     0.0579    642    0.000790
+## 2 2021-08-30 Washington     601592 31693     0.0527    266    0.000442
+## 3 2021-08-30 Marion         347818 28766     0.0827    356    0.00102 
+## 4 2021-08-30 Clackamas      418187 23674     0.0566    251    0.000600
+## 5 2021-08-30 Lane           382067 20580     0.0539    193    0.000505</code></pre>
+<pre class="r"><code># case percentage
+head(or.covid.est %&gt;%
+  filter(date ==&quot;2021-08-30&quot;) %&gt;%
+  arrange(desc(cases.perc)), n=5)</code></pre>
+<pre><code>## # A tibble: 5 x 7
+##   date       county    population cases cases.perc deaths deaths.perc
+##   &lt;date&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
+## 1 2021-08-30 Umatilla       77950 11476     0.147     117     0.00150
+## 2 2021-08-30 Malheur        30571  4078     0.133      66     0.00216
+## 3 2021-08-30 Morrow         11603  1546     0.133      20     0.00172
+## 4 2021-08-30 Jefferson      24658  2850     0.116      45     0.00182
+## 5 2021-08-30 Grant           7199   652     0.0906      8     0.00111</code></pre>
+<pre class="r"><code># deaths
+head(or.covid.est %&gt;%
+  filter(date ==&quot;2021-08-30&quot;) %&gt;%
+  arrange(desc(deaths)), n=5)</code></pre>
+<pre><code>## # A tibble: 5 x 7
+##   date       county     population cases cases.perc deaths deaths.perc
+##   &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
+## 1 2021-08-30 Multnomah      812855 47097     0.0579    642    0.000790
+## 2 2021-08-30 Marion         347818 28766     0.0827    356    0.00102 
+## 3 2021-08-30 Washington     601592 31693     0.0527    266    0.000442
+## 4 2021-08-30 Clackamas      418187 23674     0.0566    251    0.000600
+## 5 2021-08-30 Jackson        220944 18228     0.0825    202    0.000914</code></pre>
+<pre class="r"><code># death percentage
+head(or.covid.est %&gt;%
+  filter(date ==&quot;2021-08-30&quot;) %&gt;%
+  arrange(desc(deaths.perc)), n=5)</code></pre>
+<pre><code>## # A tibble: 5 x 7
+##   date       county    population cases cases.perc deaths deaths.perc
+##   &lt;date&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
+## 1 2021-08-30 Malheur        30571  4078     0.133      66     0.00216
+## 2 2021-08-30 Jefferson      24658  2850     0.116      45     0.00182
+## 3 2021-08-30 Morrow         11603  1546     0.133      20     0.00172
+## 4 2021-08-30 Gilliam         1912   123     0.0643      3     0.00157
+## 5 2021-08-30 Umatilla       77950 11476     0.147     117     0.00150</code></pre>
+<p>To do : make nice tables and make some notes</p>
+</div>
