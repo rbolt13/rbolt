@@ -10,3 +10,5 @@ View [here](https://rbolt.netlify.app/).
 ☑️ Home Page 
 
 ☑️ Change home to about and about to projects  
+
+☑️ Update README
