@@ -1,27 +1,37 @@
 ---
-title: "About Randi Bolt"
+title: "Projects"
 date: "8/26/2021"
 output: html_document
 enableEmoji : true
 ---
 
-Note : This page is out of date, and reflective of a resume I made for a specific job back in March of 2021. Update coming soon ...
-
-## About 
-Randi Bolt is an undergraduate mathematics and statistics major at Portland State University.
-
-## Education 
-**:mortar_board: Bachelor of Science in Mathematics and Statistics** <br>  Expected Graduation June 2022 <br> _Portland State University_ 
-<br> 
-**:school_satchel: Associate of Applied Science** <br>  December 2020 <br> _Portland Community College_ 
-
-# Projects 
+This page is under construction. 
 
 **:blue_book: Organ Donation Pamphlet** <br> September 2021 - December 2021 <br> _Portland State University_ 
 
 * TBD
 
-**:green_book: Oregon Grown : Dispensary Diversity** <br> November 2020 - Present <br> _Portland Community College and Portland State University_ 
+**:scroll: [An Introduction to Abstract Mathematics]()** <br> Summer 2021 <br> _Portland State University_
+
+* Coming Soon
+
+**:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 <br> _Portland State University_
+
+* Coming Soon
+
+**:herb: [Randi Grows](https://randigrows.netlify.app/about/)** <br> Summer 2021 <br> _Portland State University_
+
+* Coming Soon
+
+**:sunny: [Rsite2](https://rbolt13.github.io/rsite2/)** <br> Summer 2021 <br> _Portland State University_
+
+* Coming Soon
+
+**:chart: [Rsite](https://rbolt13.github.io/rsite/index.html)** <br> Spring 2021 <br> _Portland State University_
+
+* Coming Soon
+
+**:green_book: [Oregon Grown : Dispensary Diversity](https://rbolt13.github.io/Oregon-Grown/)** <br> November 2020 - Present <br> _Portland Community College and Portland State University_ 
 
 * Used Spatial references from Oregon Spatial Library, ARLIS,  and PCC Geography Department to apply mapping techniques such as select by attribute, spatial join, clip, and XY Table to Point, to investigate dispensary diversity in Oregon November 2020.
 
@@ -33,65 +43,3 @@ Randi Bolt is an undergraduate mathematics and statistics major at Portland Stat
 
 * Future plans to investigate dispensaries diversity using R Studio. 
 
-**:closed_book: COVID Closures ** <br> Fall 2020 <br> _Portland Community College G.I.S. Club_
-
-* Researched over 100 businesses online, via Eater Articles, Oregon’s Business License Registry, Yelp, and google searches to collaboratively create a mappable data set using google sheets and ArcPro. 
-
-* Project was never completed. 
-
-## Skills 
-**:computer: Programming Languages** : Mainly R with some C++, Python, HTML, CSS, and Git (see GitHub). 
-
-**:inbox_tray: Workplace Products** : Google Products, Microsoft Products, Discord, Slack, Zoom 
-
-**:calling: Social Media** : Github, Linkedin, Instagram, and Twitter
-
-**:map: Mapping Software** : ArcGIS Pro
-
-# Work Experience 
-
-**:herb: Stoney Only** <br> April 2018 - August 2019 <br> _Manager / Key Holder / Budtender_
-
-* Advocated for and educated cannabis patients and recreational users on varying products, cannabis terpenes, the endocannabinoid system, and legislation.
-
-* Streamed cannabis related podcasts to increase knowledge and create cannabis centered conversations among employees. 
-
-* Used Microsoft products to customize and enhance jar labels, signs, menus, sample feedback logs, and informational handouts. 
-
-* Introduced, taught, and motivated coworkers to take and post photos of our current products online. Weedmaps noticed, waived their annual site fee, and highlighted Stoney Only on their platform as an example for other dispensaries on how to better utilize their platform. 
-
-* Processed invoices in Quickbooks, consolidated bills, and assisted with monthly financial reporting and filing.
-
-**:no_entry_sign: Sheet Metal Company** <br> August 2016 - April 2017 <br> _General Accountant / Accounts Payable / Office Administrator_
-
-* Used Sage to process, code, triage and track over 50 new invoices daily.
-
-* Consolidated company credit cards up to $60,000 and monthly statements ranging from under $10 to over $3 million. 
-
-* Pioneered and coordinated paperless invoice by updating processes with the CFO, TimberScan for Sage, project managers, and project assistants in charge of change orders. 
-
-* Compiled, organized, and formatted both paper and electronic billings on million dollar projects such as Intel and OSHA Center for Health and Healing. 
-
-* Used Microsoft products to process and electronically filled tool reports of about 500 rows weekly, reimbursements, packing slips, and time cards of about 40 employees. 
-
-* Delivered over 100 weekly vendor payments of up to a million dollars weekly via check, credit card, and direct deposit, with extra attention to payment terms, which reduced company costs by $20 to $3,000 on a weekly basis. 
-
-* Provided regular support throughout the 6 main divisions of the company with contracts, change orders, project budgets, company spending, and training new hires. 
-
-# Volunteer Experience 
-
-**:sparkle: Missing Maps** <br> November 2020 - March 2021 <br> _Cartographer_
-
-* Mapped buildings and roads off satellite images with openstreetmap during virtual mapathons. 
-
-* Viewed over 25,000 aerial images to verify if there were mappable features or obstructions such as clouds. 
-
-# Professional Organizations 
-
-:earth_americas:  American Society for Photogrammetry and Remote Sensing (ASPRS) 
-
-:globe_with_meridians: International Society for Photogrammetry and Remote Sensing (ISPRS)
-
-:satellite: Oregon Urban and Regional Information Systems Association (ORURISA)
-
-:cocktail: Portland Women in Technology (PDXWIT)

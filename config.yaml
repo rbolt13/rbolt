@@ -14,10 +14,10 @@ permalinks:
 
 menu:
   main:
-    - name: Home
+    - name: About
       url: ""
       weight: 1
-    - name: About
+    - name: Projects
       url: "about/"
       weight: 2
     - name: Categories

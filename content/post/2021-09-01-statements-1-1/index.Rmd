@@ -1,0 +1,170 @@
+---
+title: 'An Introduction to Abstract Mathematics - 1.1 : Statements'
+author: Randi Bolt
+date: '2021-09-01'
+slug: statements-1.1
+categories:
+  - writing proofs
+tags:
+  - writing proofs
+  - abstract mathematics
+  - robert j bond
+  - william j keane
+  - An Introduction to Abstract Mathematics
+  - notes
+  - book problems
+  - statements
+draft: true
+---
+
+# Introduction
+
+[An Introduction to Abstract Mathemtics](https://www.amazon.com/Introduction-Abstract-Mathematics-Robert-Bond/dp/1577665392) by Robert J Bond, and William J. Keane is a book for undergraduate mathematics majors to better help them with their proof writing. Admittedly I have already taken three upper level proof writing classes at this point, so a lot of this is review I wanted to solidify before taking 400 level classes in the fall. These posts will simply be my notes, some examples that stood out to me, and a few exercises per section. 
+
+# Notes
+
+* **axioms** : are given statements that other statements are deduced from
+
+* **propositions** : are deductions made from axioms 
+
+* **theorems** : are propositions that are particularly important 
+
+* **proofs** : are the arguments that use logic to make deductions 
+
+An integer x is called a **multiple** of an integer _n_ if $x=kn$ for some integer _k_. 
+
+* A **statement** is any declarative sentence that is either true or false. 
+
+A **variable** is a symbol that stands for an undetermined number. 
+
+* An **open statement** is any declarative sentence containing one or more variables that is not a statement but becomes a statement when the variables are assigned values. 
+
+* A **quantifier** is an expression that indicates the scope (all, some, both)
+
+* $\forall$ is the **universal quantifier** "for all" or "for every".
+
+* $\exists$ is the **existential quantifier** "there is" or "there exists" 
+
+* A quantifier applied to a variable is a **bound variable**
+
+* A variable that is not bound is **free**
+
+**Example 6** : If _n_ is an even integer, then $n^2$ is even. 
+
+- this is a statement because the quantifier $\forall$ : "For every integer _n_, if _n_ is even, then $n^2$ is even." Making _n_ a bound variable. 
+
+**Example 7** : A triangle has three sides. 
+
+- "For every plane figure _T_, if _T_ is a triangle, then _T_ has three sides."
+
+**Example 8** : The square of a real number is nonnegative. 
+
+- "$\forall x$, if $x$ is a real number, then $x^2\geq 0$." 
+
+**Example 10** : Some even numbers are multiples of 3. 
+
+- "There exists an even integer that is a multiple of 3."
+
+- prove by finding the existence of one such number (like 6)
+
+**Example 11** : Some real numbers are irrational.
+
+- "There exists  a real number _x_ such that _x_ is irrational." 
+
+**Example 14** : A real-valued function $f(x)$ is **bounded** on the closed interval $[a,b]$ if $f(x)$ is defined on $[a,b]$ and $\exists$ a positive real number $M$ such that $|f(x)|\leq M$ $\forall x\in[a,b]$
+
+**Example 15 a** : $\forall$ real numbers $x$, $\exists$ a real number $y\in y^3 =x$. 
+
+- "Every real number has a cube root" (true)
+
+- This is a consequence (result) of the Intermediate Value Theorem (if f is continuous on [a,b] then it takes on any value between f(a) and f(b))
+
+**Example 15 b** : $\exists$ a real number $y\in \forall$ real numbers$x$, $y^3 =x$.
+
+- "For **every** real number x is the cube of a **single** number y" (false)
+
+- there exists a number single number y such that $y^3=x$ is true for all real numbers. (false) 
+
+**Definition 1.1.3** If P is a statement, the **negation** of P, written $\neg P$ (and read "not P"), is the statement "P is false". 
+
+- for statements P or $\neg P$, one is true and one is false. 
+
+- every statement can be negated by adding "it is not true" in front of it (however this neglects what the statement actually means)
+
+**Example 22** P : If _n_ is an even integer, then $n^2$ is even. ; $\neg P$: It is not true that if _n_ is an even integer, then $n^2$ is even. 
+
+OR
+
+P : For all integers _n_, if _n_ is even, then $n^2$ is even.
+
+$\neg P$ : There exists an even interger _n_ such that $n^2$ is odd. 
+
+* if we negate something with an existential quantifier, then a universal quantifier is required. 
+
+_Rule 1_ : the negation of "For all x, P(x)" is "For some x, $\neg P(x)$. 
+
+_Rule 2_ : the negation of "For somex, P(x)" is "For all x, $\neg P(x)$.
+
+* The negation of $\exists x \in \forall y, P(x,y)$ is $\forall x, \exists y\in\neg P(x,y)$
+
+**Example 26** : P: There is a real nuber whose square is negative. 
+
+$\neg P$ : The square of every real number is not negative 
+
+- note that saying "there is a real number whose square is nonnegative" would be incorrect since both P and $\neg P$ could both technically be true. 
+
+**Example 29** : P: There is a continuous real-valued function $f(x)$ such that $f(x)$ is not differentiable at any real number c. 
+
+$\neg P$: For every continuous real-valued function $f(x)$ , there is a real number c such that $f(x)$ is differentiable at c. 
+
+# Exercises 1.1
+
+1. Determine whether each of the following sentences is a statement, an open sentence, or neither.
+
+(a) The Boston Celtics have won 16 NBA championships. 
+
+- this is a statement that is also true 
+
+(b) The plane is leaving in five minutes.
+
+- this is a statement that could be either true or false depending on when the plane leaves. 
+
+(c) Get a note from your doctor.
+
+- this is neither a statement or an open statement because it is neither true nor false, and defining a variable would not change that. 
+
+(d) Is that the best you can do?
+
+- this is neither because it is a question. 
+
+(e) Excessive exposure to the sun may cause skin cancer. 
+
+- statement that is true.
+
+(f) 5+2=6
+
+- statement that is false. 
+
+(g) Someone in this room is a murderer. 
+
+- statement that is false. 
+
+(h) $x^2+1\ne 0$
+
+- an open statement that may be true or false depending on what x is. 
+
+(i) For every real number x, $x^2+1\ne 0$
+
+- statement that is true, because x is defined as all real numbers.
+
+(j) The equation of a circle of radius 1 with center at the origin is $x^2+y^2=1$
+
+- a statement that is true.
+
+(k) If _n_ and _m_ are even integers, then _nm_ is even. 
+
+- a statement that is true, because n and m are defined as even integers. 
+
+2. For each of the following statements, determine if it has any universal or existential quantifiers. If it has universal quantifiers, rewrite it in the form "for all ..." 
+
+
