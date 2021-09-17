@@ -11,11 +11,15 @@ This page is under construction.
 
 * TBD
 
-**:scroll: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 <br> _Portland State University_
+**:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_
 
 * Coming Soon
 
-**:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 <br> _Portland State University_
+**:scroll: [An Introduction to Abstract Mathematics](https://rbolt13.github.io/itam/)** <br> Summer 2021  - Current <br> _Portland State University_
+
+* Coming Soon
+
+**:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 - Current<br> _Portland State University_
 
 * Coming Soon
 
