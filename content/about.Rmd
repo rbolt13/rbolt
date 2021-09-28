@@ -5,35 +5,17 @@ output: html_document
 enableEmoji : true
 ---
 
-This page is under construction. 
-
-**:blue_book: Organ Donation Pamphlet** <br> September 2021 - December 2021 <br> _Portland State University_ 
-
-* TBD
-
-**:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_
-
-* Coming Soon
-
-**:scroll: [An Introduction to Abstract Mathematics](https://rbolt13.github.io/itam/)** <br> Summer 2021  - Current <br> _Portland State University_
-
-* Coming Soon
-
-**:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 - Current<br> _Portland State University_
-
-* Coming Soon
-
-**:herb: [Randi Grows](https://randigrows.netlify.app/about/)** <br> Summer 2021 <br> _Portland State University_
-
-* Coming Soon
-
-**:sunny: [Rsite2](https://rbolt13.github.io/rsite2/)** <br> Summer 2021 <br> _Portland State University_
-
-* Coming Soon
-
 **:chart: [Rsite](https://rbolt13.github.io/rsite/index.html)** <br> Spring 2021 <br> _Portland State University_
 
-* Coming Soon
+* Projects from a 300 level statistics class at Portland State University (STAT 363: Introduction to R) presented through a github repository. 
+
+* Used NYC flight data from nycflights13 library, as well as magrittr, dylyr, pander, tidyr, gt, tidyverse, ggplot2, ggthemes, maps, and lubridate libraries to make tables and a map to answer a couple common travel questions. 
+
+* Analyzed data from Kobe Bryant's performance with the Los Angeles Lakers in the 2009 NBA finals against the Orlando Magic. Then using probability and statistics concepcts such as mean, quantile, conditional probabilities (i.e. Kobe will make a shot given that he made the previous shot), and then compared Kobe's shooting streaks to that of a simulated an independent shooter to find that Kobe did not have a hot hand. 
+
+* Explored how power generated from gas and hydro differed from 2013 and 2017 with data from the Global Power Plant Database. Graphs were made in base R, and ggplot. 
+
+* 11 different COVID-19 data sets between 58 and 3342 observations, and between 9 and 204 variables were used from a Johns Hopkins github repository to analyze states that were highly and mildly impacted by the disease. Wrangled the data into long form, combined multiple data sets, converted date variables into date variables types, tables of average confirmed cases and deaths 90 days before the vaccine and 90 days after, and created graphs to show cases, deaths, and vaccinations, as well as frequency of mask use and opening and closures by state. 
 
 **:green_book: [Oregon Grown : Dispensary Diversity](https://rbolt13.github.io/Oregon-Grown/)** <br> November 2020 - Present <br> _Portland Community College and Portland State University_ 
 
