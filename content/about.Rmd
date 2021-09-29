@@ -29,3 +29,17 @@ enableEmoji : true
 
 * Future plans to investigate dispensaries diversity using R Studio. 
 
+# Additional Links 
+
+**:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 - Current<br> _Portland State University_
+
+**:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_
+
+**:scroll: [An Introduction to Abstract Mathematics (Notes)](https://rbolt13.github.io/itam/)** <br> Summer 2021  - Current <br> _Portland State University_
+
+**:herb: [Randi Grows](https://randigrows.netlify.app/about/)** <br> Summer 2021 <br> _Portland State University_
+
+**:sunny: [Rsite2](https://rbolt13.github.io/rsite2/)** <br> Summer 2021 <br> _Portland State University_
+
+
+
