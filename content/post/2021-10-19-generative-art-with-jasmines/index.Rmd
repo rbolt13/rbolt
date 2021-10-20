@@ -70,17 +70,6 @@ library(jasmines)
   ) 
 ```
 
-### Sunflower
-
-```{r}
-use_seed(5) %>%
-  entity_circle(grain = 1000, size = 13) %>%
-  unfold_warp(iterations = 100) %>%
-  style_ribbon(
-    color = "#7B8235",
-    background = "#F4D487")
-```
-
 ### Snake Charmer
 
 ```{r}
