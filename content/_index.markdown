@@ -15,8 +15,7 @@ My name is **Randi Bolt** (she/her/hers pronouns) and I am an undergraduate math
 All post are shown chronologically below, and can been seen separated out by 'Category' and 'Tags' in the respective tabs above. To learn more about my past and ongoing projects, or to get ahold of me check out the 'Projects' and 'Contact' tabs as well. 
 
 Thanks for stopping by, and please enjoy! 
-
+</center>
 
 
 ### Posts
-</center>
