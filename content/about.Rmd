@@ -31,6 +31,8 @@ enableEmoji : true
 
 # Additional Links 
 
+### In Progress or Incomplete Projects
+
 **:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 - Current<br> _Portland State University_
 
 **:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_

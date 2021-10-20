@@ -1,0 +1,93 @@
+---
+title: Generative Art with Jasmines
+author: Randi Bolt
+date: '2021-10-19'
+slug: generative-art-with-jasmines
+categories:
+  - rstudio
+  - art
+tags:
+  - rstudio
+  - tutorial
+  - art
+  - jasmines
+  - dplyr
+  - design
+---
+
+For a class fall term 2021 at PSU I had to do a piece of 'self' art, so to expland my skills in R I decided to try out some generative art. Most of these are based off example given on djnavarro's github [here](https://github.com/djnavarro/jasmines). 
+
+### Final Design 
+
+```{r, message=F, error=F}
+library(dplyr) 
+library(jasmines)
+use_seed(5) %>%
+  entity_circle(grain = 1000, size = 10) %>%
+  unfold_warp(iterations = 100) %>%
+  style_ribbon(
+    color = "#9E4244",
+    background = "#FDAB9F")
+```
+
+When playing around with this package, I initially had something less fluid and full of right angles, but wanted to show more movement in the design. I have a dance background and aside from fluid movement we also focused a lot on circles and rotation. The other reason I like this design is because it reminds me of a flower. I have seven tattoos, two of which are flowers, and I’d like to add more flowers someday. The two colors I choose are salmon and rosewood. I really love different shades of pink, and colors like salmon, and rosewood feel like a more sophisticated pink to me. 
+
+### Other Designs
+```{r}
+use_seed(1) %>%
+  entity_circle(grain = 1000, size = 4) %>%
+  unfold_warp(iterations = 100) %>%
+  style_ribbon(
+    palette="base",
+    colour = "ind",
+    background = "mistyrose")
+```
+
+### Typophobia
+
+```{r}
+library(jasmines)
+  scene_discs(
+    rings = 13, 
+    points = 500, 
+    size = 5
+  ) %>%
+  mutate(ind = 1:n()) %>%
+  unfold_warp(
+    iterations = 10,
+    scale = .5, 
+    output = "layer" 
+  ) %>%
+  unfold_tempest(
+    iterations = 10,
+    scale = .01
+  ) %>%
+  style_ribbon(
+    color = "#48AAAD",
+    colour = "ind",
+    alpha = c(.1,.1),
+    background = "#016064" 
+  ) 
+```
+
+### Sunflower
+
+```{r}
+use_seed(5) %>%
+  entity_circle(grain = 1000, size = 13) %>%
+  unfold_warp(iterations = 100) %>%
+  style_ribbon(
+    color = "#7B8235",
+    background = "#F4D487")
+```
+
+### Snake Charmer
+
+```{r}
+use_seed(4) %>%
+  entity_circle(grain = 10000) %>%
+  unfold_tempest(iterations = 13) %>%
+  style_ribbon(background = "oldlace")
+```
+
+

@@ -1,0 +1,89 @@
+---
+title: Generative Art with Jasmines
+author: Randi Bolt
+date: '2021-10-19'
+slug: generative-art-with-jasmines
+categories:
+  - rstudio
+  - art
+tags:
+  - rstudio
+  - tutorial
+  - art
+  - jasmines
+  - dplyr
+  - design
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>For a class fall term 2021 at PSU I had to do a piece of ‘self’ art, so to expland my skills in R I decided to try out some generative art. Most of these are based off example given on djnavarro’s github <a href="https://github.com/djnavarro/jasmines">here</a>.</p>
+<div id="final-design" class="section level3">
+<h3>Final Design</h3>
+<pre class="r"><code>library(dplyr) 
+library(jasmines)
+use_seed(5) %&gt;%
+  entity_circle(grain = 1000, size = 10) %&gt;%
+  unfold_warp(iterations = 100) %&gt;%
+  style_ribbon(
+    color = &quot;#9E4244&quot;,
+    background = &quot;#FDAB9F&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>When playing around with this package, I initially had something less fluid and full of right angles, but wanted to show more movement in the design. I have a dance background and aside from fluid movement we also focused a lot on circles and rotation. The other reason I like this design is because it reminds me of a flower. I have seven tattoos, two of which are flowers, and I’d like to add more flowers someday. The two colors I choose are salmon and rosewood. I really love different shades of pink, and colors like salmon, and rosewood feel like a more sophisticated pink to me.</p>
+</div>
+<div id="other-designs" class="section level3">
+<h3>Other Designs</h3>
+<pre class="r"><code>use_seed(1) %&gt;%
+  entity_circle(grain = 1000, size = 4) %&gt;%
+  unfold_warp(iterations = 100) %&gt;%
+  style_ribbon(
+    palette=&quot;base&quot;,
+    colour = &quot;ind&quot;,
+    background = &quot;mistyrose&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="typophobia" class="section level3">
+<h3>Typophobia</h3>
+<pre class="r"><code>library(jasmines)
+  scene_discs(
+    rings = 13, 
+    points = 500, 
+    size = 5
+  ) %&gt;%
+  mutate(ind = 1:n()) %&gt;%
+  unfold_warp(
+    iterations = 10,
+    scale = .5, 
+    output = &quot;layer&quot; 
+  ) %&gt;%
+  unfold_tempest(
+    iterations = 10,
+    scale = .01
+  ) %&gt;%
+  style_ribbon(
+    color = &quot;#48AAAD&quot;,
+    colour = &quot;ind&quot;,
+    alpha = c(.1,.1),
+    background = &quot;#016064&quot; 
+  ) </code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="sunflower" class="section level3">
+<h3>Sunflower</h3>
+<pre class="r"><code>use_seed(5) %&gt;%
+  entity_circle(grain = 1000, size = 13) %&gt;%
+  unfold_warp(iterations = 100) %&gt;%
+  style_ribbon(
+    color = &quot;#7B8235&quot;,
+    background = &quot;#F4D487&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="snake-charmer" class="section level3">
+<h3>Snake Charmer</h3>
+<pre class="r"><code>use_seed(4) %&gt;%
+  entity_circle(grain = 10000) %&gt;%
+  unfold_tempest(iterations = 13) %&gt;%
+  style_ribbon(background = &quot;oldlace&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
