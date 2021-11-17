@@ -15,7 +15,7 @@ tags:
   - design
 ---
 
-For a class fall term 2021 at PSU I had to do a piece of 'self' art, so to expland my skills in R I decided to try out some generative art. Most of these are based off example given on djnavarro's github [here](https://github.com/djnavarro/jasmines). 
+For a class fall term 2021 at PSU I had to do a piece of 'self' art, so to expand my skills in R I decided to try out some generative art. Most of these are based off example given on djnavarro's github [here](https://github.com/djnavarro/jasmines). 
 
 ### Final Design 
 
@@ -30,7 +30,7 @@ use_seed(5) %>%
     background = "#FDAB9F")
 ```
 
-When playing around with this package, I initially had something less fluid and full of right angles, but wanted to show more movement in the design. I have a dance background and aside from fluid movement we also focused a lot on circles and rotation. The other reason I like this design is because it reminds me of a flower. I have seven tattoos, two of which are flowers, and I’d like to add more flowers someday. The two colors I choose are salmon and rosewood. I really love different shades of pink, and colors like salmon, and rosewood feel like a more sophisticated pink to me. 
+When playing around with this package, I initially had something less fluid and full of right angles, but wanted to show more movement in the design. I have a dance background and aside from fluid movement we also focused a lot on circles and rotation. The other reason I like this design is because it reminds me of a flower. I have seven tattoos, two of which are flowers. The two colors I chose are salmon and rosewood. I enjoy different shades of pink, and colors like salmon, and rosewood feel like a more sophisticated pink to me. 
 
 ### Other Designs
 ```{r}
