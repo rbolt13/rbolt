@@ -1,0 +1,28 @@
+---
+title: 'Physical Interpretation of Skewness '
+author: Randi Bolt
+date: '2021-11-16'
+slug: physical-interpretation-of-skewness
+categories:
+  - statistics
+tags:
+  - statistics
+  - skewness
+  - distribution
+  - picture
+  - notes
+---
+
+<center>
+
+Mean - Median - Mode : Hips - Waist - Shoulders
+
+![](img1.png)
+
+Hips dictate skewnees!! 
+
+![](img2.png)
+
+Easy. 
+
+</center>
