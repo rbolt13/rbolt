@@ -1,0 +1,14 @@
+---
+title: Let epsilon = min(x-a, b-x)
+author: Randi Bolt
+date: '2021-11-16'
+slug: let-epsilon-be-min
+categories:
+  - abstract math
+tags:
+  - abstratct math
+  - proof writing
+  - picture
+---
+
+![](img1.png)

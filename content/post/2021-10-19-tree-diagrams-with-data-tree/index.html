@@ -1,0 +1,88 @@
+---
+title: Tree Diagrams with data.tree
+author: Randi Bolt
+date: '2021-10-19'
+slug: tree-diagrams-with-data-tree
+categories:
+  - rstudio
+tags:
+  - rstudio
+  - tutorial
+  - data.tree
+draft: true
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<script src="{{< blogdown/postref >}}index_files/htmlwidgets/htmlwidgets.js"></script>
+<script src="{{< blogdown/postref >}}index_files/viz/viz.js"></script>
+<link href="{{< blogdown/postref >}}index_files/DiagrammeR-styles/styles.css" rel="stylesheet" />
+<script src="{{< blogdown/postref >}}index_files/grViz-binding/grViz.js"></script>
+
+
+<p>I have some pictures of tree diagrams in my Statistics-461 Notes (<a href="https://rbolt13.github.io/stat461/">here</a>), that I would rather create with a chunk of code in R.</p>
+<p>This first example is for W3-D5 Example 1.</p>
+<pre class="r"><code># data.tree structure consites of multiple Node objects
+library(data.tree)
+# Node basic building block of data.tree structure
+ex1 &lt;- Node$new(&quot;Example 1&quot;)
+  d &lt;- ex1$AddChild(&quot;Uses Drug&quot;, p = 0.01)
+  t1 &lt;- d$AddChild(&quot;Positive Test&quot;, p = 0.99)
+  t2 &lt;- d$AddChild(&quot;Negative Test&quot;, p = 0.995)
+  dc &lt;- ex1$AddChild(&quot;Does Not Use Drug&quot;, p = 0.005)
+  t3 &lt;- dc$AddChild(&quot;Positive Test&quot;, p = 0.015)
+  t4 &lt;- dc$AddChild(&quot;Negative Test&quot;, p = 0.985)
+print(ex1, &quot;p&quot;)</code></pre>
+<pre><code>##               levelName     p
+## 1 Example 1                NA
+## 2  ¦--Uses Drug         0.010
+## 3  ¦   ¦--Positive Test 0.990
+## 4  ¦   °--Negative Test 0.995
+## 5  °--Does Not Use Drug 0.005
+## 6      ¦--Positive Test 0.015
+## 7      °--Negative Test 0.985</code></pre>
+<pre class="r"><code># another way to add Custom attributes
+# needs child in &#39;&#39;, wont work the other way 
+# ex1$&#39;Uses Drug&#39;$p &lt;- 0.01
+# ex1$&#39;Does Not Use Drug&#39;$p &lt;- 0.99
+# ex1$&#39;Uses Drug&#39;$&#39;Positive Test&#39;$p &lt;- 0.995
+# ex1$&#39;Uses Drug&#39;$&#39;Negative Test&#39;$p &lt;- 0.005
+# ex1$&#39;Does Not Use Drug&#39;$&#39;Positive Test&#39;$p &lt;- 0.015
+# ex1$&#39;Does Not Use Drug&#39;$&#39;Negative Test&#39;$p &lt;- 0.985</code></pre>
+<pre class="r"><code># formatters
+SetFormat(ex1, &quot;p&quot;, formatFun = FormatPercent)
+print(ex1, &quot;p&quot;)</code></pre>
+<pre><code>##               levelName       p
+## 1 Example 1                    
+## 2  ¦--Uses Drug          1.00 %
+## 3  ¦   ¦--Positive Test 99.00 %
+## 4  ¦   °--Negative Test 99.50 %
+## 5  °--Does Not Use Drug  0.50 %
+## 6      ¦--Positive Test  1.50 %
+## 7      °--Negative Test 98.50 %</code></pre>
+<pre class="r"><code>plot(ex1)</code></pre>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"diagram":"digraph {\n\n\n\n\n  \"1\" [label = \"Example 1\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"Uses Drug\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"Positive Test\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"Negative Test\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"Does Not Use Drug\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"Positive Test\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"Negative Test\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"1\"->\"2\" \n  \"1\"->\"5\" \n  \"2\"->\"3\" \n  \"2\"->\"4\" \n  \"5\"->\"6\" \n  \"5\"->\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>library(DiagrammeR)
+# need to spend more time figuring out how to show p 
+# GetNodeLabel &lt;- function(node) switch(node$type, 
+#                                       terminal = paste0(&#39;$ &#39;, format(node$p)),
+#                                      paste0(&#39;Uses Drug\n&#39;, &#39;$ &#39;, format(node$p)) )
+# GetEdgeLabel &lt;- function(node) {
+#   if(!node$isRoot &amp;&amp; node$parent$type == &#39;p&#39;){
+#     label = paste0(node$name, &quot; (&quot;, node$p, &quot;)&quot;)
+#   } else {
+#     label = node$name
+#   }
+#   return (label)
+# }
+# GetNodeShape &lt;- function(node) switch(node$type, decision = &quot;box&quot;, chance = &quot;circle&quot;, terminal = &quot;none&quot;)
+# SetEdgeStyle(ex1, fontname = &#39;helvetica&#39;, label = GetEdgeLabel)
+# SetNodeStyle(ex1, fontname = &#39;helvetica&#39;, label = GetNodeLabel, shape = GetNodeShape)
+# set graph from left to right
+SetGraphStyle(ex1, rankdir = &quot;LR&quot;)
+plot(ex1)</code></pre>
+<div id="htmlwidget-2" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"diagram":"digraph {\n\ngraph [rankdir = \"LR\"]\n\n\n\n  \"1\" [label = \"Example 1\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"Uses Drug\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"Positive Test\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"Negative Test\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"Does Not Use Drug\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"Positive Test\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"Negative Test\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"1\"->\"2\" \n  \"1\"->\"5\" \n  \"2\"->\"3\" \n  \"2\"->\"4\" \n  \"5\"->\"6\" \n  \"5\"->\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>Sources</p>
+<p><a href="https://cran.r-project.org/web/packages/data.tree/vignettes/data.tree.html">Introduction to data.tree</a></p>
+<p><a href="https://datakwery.com/project/tree/">Tree Diagrams in R</a></p>

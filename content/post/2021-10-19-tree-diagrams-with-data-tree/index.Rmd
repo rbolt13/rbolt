@@ -1,0 +1,76 @@
+---
+title: Tree Diagrams with data.tree
+author: Randi Bolt
+date: '2021-10-19'
+slug: tree-diagrams-with-data-tree
+categories:
+  - rstudio
+tags:
+  - rstudio
+  - tutorial
+  - data.tree
+draft: true
+---
+I have some pictures of tree diagrams in my Statistics-461 Notes ([here](https://rbolt13.github.io/stat461/)), that I would rather create with a chunk of code in R. 
+
+This first example is for W3-D5 Example 1. 
+
+```{r}
+# data.tree structure consites of multiple Node objects
+library(data.tree)
+# Node basic building block of data.tree structure
+ex1 <- Node$new("Example 1")
+  d <- ex1$AddChild("Uses Drug", p = 0.01)
+  t1 <- d$AddChild("Positive Test", p = 0.99)
+  t2 <- d$AddChild("Negative Test", p = 0.995)
+  dc <- ex1$AddChild("Does Not Use Drug", p = 0.005)
+  t3 <- dc$AddChild("Positive Test", p = 0.015)
+  t4 <- dc$AddChild("Negative Test", p = 0.985)
+print(ex1, "p")
+```
+
+```{r}
+# another way to add Custom attributes
+# needs child in '', wont work the other way 
+# ex1$'Uses Drug'$p <- 0.01
+# ex1$'Does Not Use Drug'$p <- 0.99
+# ex1$'Uses Drug'$'Positive Test'$p <- 0.995
+# ex1$'Uses Drug'$'Negative Test'$p <- 0.005
+# ex1$'Does Not Use Drug'$'Positive Test'$p <- 0.015
+# ex1$'Does Not Use Drug'$'Negative Test'$p <- 0.985
+```
+
+```{r}
+# formatters
+SetFormat(ex1, "p", formatFun = FormatPercent)
+print(ex1, "p")
+plot(ex1)
+```
+
+```{r}
+library(DiagrammeR)
+# need to spend more time figuring out how to show p 
+# GetNodeLabel <- function(node) switch(node$type, 
+#                                       terminal = paste0('$ ', format(node$p)),
+#                                      paste0('Uses Drug\n', '$ ', format(node$p)) )
+# GetEdgeLabel <- function(node) {
+#   if(!node$isRoot && node$parent$type == 'p'){
+#     label = paste0(node$name, " (", node$p, ")")
+#   } else {
+#     label = node$name
+#   }
+#   return (label)
+# }
+# GetNodeShape <- function(node) switch(node$type, decision = "box", chance = "circle", terminal = "none")
+# SetEdgeStyle(ex1, fontname = 'helvetica', label = GetEdgeLabel)
+# SetNodeStyle(ex1, fontname = 'helvetica', label = GetNodeLabel, shape = GetNodeShape)
+# set graph from left to right
+SetGraphStyle(ex1, rankdir = "LR")
+plot(ex1)
+```
+
+Sources 
+
+[Introduction to data.tree](https://cran.r-project.org/web/packages/data.tree/vignettes/data.tree.html)
+
+[Tree Diagrams in R](https://datakwery.com/project/tree/)
