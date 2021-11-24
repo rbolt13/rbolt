@@ -5,6 +5,7 @@ View [here](https://rbolt.netlify.app/).
 
 # To Do 
 * Add bullets to projects on project page
+* Add comment section on blog posts
 
 # Done
 ☑️ Home Page 
