@@ -1,0 +1,47 @@
+---
+title: Proof that H and I-H are Idempotent
+author: 'Randi '
+date: '2021-11-23'
+slug: proof-that-h-and-i-h-are-idempotent
+categories:
+  - proof
+tags:
+  - proof writing
+  - proof
+  - multiple linear regression
+  - X(X^TX)^-1X^T
+  - yhat
+  - I-H
+  - abstratct math
+  - statistics
+  - hat matrix
+  - idempotent
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="prove-h-and-i-h-are-idempotent" class="section level1">
+<h1>Prove H and I-H are Idempotent</h1>
+<p>Define the hat matrix <span class="math inline">\(H=X(X^TX)^{-1}X^T\)</span>.</p>
+<p>For H to be Idempotent then <span class="math inline">\(HH=H\)</span></p>
+<p><span class="math display">\[\begin{equation}\label{HH=H}
+\begin{split}
+HH &amp; =[X(X^TX)^{-1}X^T][X(X^TX)^{-1}X^T]\\
+&amp; = X(X^TX)^{-1}X^TX(X^TX)^{-1}X^T\quad\quad(X^TX)^{-1}X^TX=1\\
+&amp; = X(X^TX)^{-1}X^T\\
+&amp; = H
+\end{split}
+\end{equation}\]</span></p>
+<p>Therefore by the series of equalities H is idempotent.</p>
+<p>For I-H to be idempotent then <span class="math inline">\((I-H)(I-H)=I-H\)</span></p>
+<p><span class="math display">\[\begin{equation}\label{I-H}
+\begin{split}
+(I-H)(I-H) &amp; =II-HI-IH+HH\quad\quad II=I, HI=IH=H, HH=H\\
+&amp; = I-H-H+H\\
+&amp; = I-H
+\end{split}
+\end{equation}\]</span></p>
+<p>Therefor by the series of equalities I-H is idempotent.</p>
+<p>QED.</p>
+</div>
