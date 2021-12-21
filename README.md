@@ -7,6 +7,9 @@ View [here](https://rbolt.netlify.app/).
 * Add bullets to projects on project page
 * Add comment section on blog posts
 * Add show / hide code button
+* Day / Night mode
+* Change footer Github word to logo image
+* Add Resume to to contact page
 
 # Done
 ☑️ Home Page 
