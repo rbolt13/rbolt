@@ -7,7 +7,7 @@ enableEmoji : true
 
 **:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 - Current<br> _Personal_
 
-* Personal website and second blog created using blogdown and R studio, presented through a github repository. Website includes plenty of coding basics such as images, hyperlinks, bold and italicized text, headers, centered and indented text, emojis, and a footer link to my Github profile. 
+* Personal website and second blog created using blogdown and R studio. Presented through a github repository, this website includes plenty of coding basics such as images, hyperlinks, bold and italicized text, headers, centered and indented text, emojis, and a footer link to my Github profile. 
 
 * Blog posts are shown chronologically on the about page, as well as sorted by tag and category. A projects page include 10 various projects, including class notes for 3 of my upper division undergraduate statistics classes.  
 
