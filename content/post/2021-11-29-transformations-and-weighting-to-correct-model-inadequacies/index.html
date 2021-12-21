@@ -1,0 +1,284 @@
+---
+title: Transformations and Weighting to Correct Model Inadequacies
+author: Randi Bolt
+date: '2021-11-29'
+slug: transformations-and-weighting-to-correct-model-inadequacies
+categories:
+  - statistics
+tags:
+  - book problems
+  - data
+  - notes
+  - multiple linear regression
+  - statistics
+  - tutorial
+  - transformations
+  - weighting to correct model inadeqacies
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The examples are from [this] textbook, and my class notes are [here].</p>
+</div>
+<div id="example-5.1-the-electric-utility-data" class="section level1">
+<h1>Example 5.1 : The Electric Utility Data</h1>
+<p>An electric utility company is interested in developing a model relating peak-hour demand <span class="math inline">\((y)\)</span> to total energy usage during the month <span class="math inline">\((x)\)</span>.</p>
+<pre class="r"><code># load data
+ex51 = read.table(&quot;ex5-1.txt&quot;,header = T)
+head(ex51)</code></pre>
+<pre><code>##   Customer x_.kWh. y_.kW.
+## 1        1     679   0.79
+## 2        2     292   0.44
+## 3        3    1012   0.56
+## 4        4     493   0.79
+## 5        5     582   2.70
+## 6        6    1156   3.64</code></pre>
+<pre class="r"><code># plot 
+plot(ex51$x_.kWh., 
+     ex51$y_.kW.,
+     xlab = &quot;Usage&quot;,
+     ylab = &quot;Demand&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" alt="Scatter diagram of the energy demand (kW) versus energy usage (kWh)" width="672" />
+<p class="caption">
+Figure 1: Scatter diagram of the energy demand (kW) versus energy usage (kWh)
+</p>
+</div>
+<p>As a starting point a simple linear regression model is assumed, and the least-squares fit is :</p>
+<p><span class="math display">\[\hat y=-0.83130+0.00368x\]</span></p>
+<pre class="r"><code># model
+lm51 &lt;- lm(ex51$y_.kW. ~ ex51$x_.kWh., data = ex51)
+# summary (analysis of variance)
+summary(lm51)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ex51$y_.kW. ~ ex51$x_.kWh., data = ex51)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.1399 -0.8275 -0.1934  1.2376  3.1522 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -0.8313037  0.4416121  -1.882   0.0655 .  
+## ex51$x_.kWh.  0.0036828  0.0003339  11.030 4.11e-15 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.577 on 51 degrees of freedom
+## Multiple R-squared:  0.7046, Adjusted R-squared:  0.6988 
+## F-statistic: 121.7 on 1 and 51 DF,  p-value: 4.106e-15</code></pre>
+<pre class="r"><code># plot 
+plot(ex51$x_.kWh.,
+     ex51$y_.kW.,
+     xlab = &quot;Usage&quot;,
+     ylab = &quot;Demand&quot;)
+abline(lm51, col = &quot;red&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" alt="Scatter diagram of the energy demand (kW) versus energy usage (kWh) with Simple Linear Model" width="672" />
+<p class="caption">
+Figure 2: Scatter diagram of the energy demand (kW) versus energy usage (kWh) with Simple Linear Model
+</p>
+</div>
+<p>For this model <span class="math inline">\(R^2=0.7046\)</span>; that is about 70% of the variability in demand is accounted for by the straight-line fit to energy usage. The summary statistics do not reveal any obvious problems with this model.</p>
+<pre class="r"><code># R-student values versus fitter values fitted
+plot(fitted(lm51),
+     rstudent(lm51),
+     ylab=TeX(r&#39;($t_i$)&#39;),
+     xlab=TeX(r&#39;($\hat{y}_i$)&#39;),
+     pch = 16);abline(0, 0,lty = 2)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" alt="Plot of R-Student v.s fitted values" width="672" />
+<p class="caption">
+Figure 3: Plot of R-Student v.s fitted values
+</p>
+</div>
+<p>Residuals form an outward-opening funnel, indicating that the error variance is increasing as energy consumption increases. A transformation may be helpful helpful in correcting this model inadequacy. To select the form of the transformation, note that the response variable y may be viewed as a “count” of the number of kilowatts used by a customer during a particular hour. The simplest probabilistic model for count data is the Poisson distribution. This suggests regressing <span class="math inline">\(y^*=\sqrt{y}\)</span> on x as a variance-stabilizing transformation. The resulting least-squares fit is :</p>
+<p><span class="math display">\[\hat y^*=0.5822+0.0009529x\]</span></p>
+<pre class="r"><code># y star 
+ex51$ystar &lt;- sqrt(ex51$y_.kW.)
+# transformed model
+lm51T &lt;- lm(ex51$ystar ~ ex51$x_.kWh., data = ex51)# summary (analysis of variance)
+summary(lm51T)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ex51$ystar ~ ex51$x_.kWh., data = ex51)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.39185 -0.30576 -0.03875  0.25378  0.81027 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  5.822e-01  1.299e-01   4.481 4.22e-05 ***
+## ex51$x_.kWh. 9.529e-04  9.824e-05   9.699 3.61e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.464 on 51 degrees of freedom
+## Multiple R-squared:  0.6485, Adjusted R-squared:  0.6416 
+## F-statistic: 94.08 on 1 and 51 DF,  p-value: 3.614e-13</code></pre>
+<pre class="r"><code># R-student values versus fitted values for the transformed data
+plot(fitted(lm51T),
+     rstudent(lm51T),
+     ylab=TeX(r&#39;($t_i$)&#39;),
+     xlab=TeX(r&#39;($\hat{y}^*_i$)&#39;),
+     pch = 16);abline(0, 0,lty = 2)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" alt="Plot of R-student values versus fitted values for the transformed data" width="672" />
+<p class="caption">
+Figure 4: Plot of R-student values versus fitted values for the transformed data
+</p>
+</div>
+<p>The impression from examining this plot is that the variance is stable; consequently, we conclude that the transformed model is adequate.</p>
+<p>Note that there is one suspiciously large residual (customer 26) and one customer whose energy usage is somewhat large (customer 50). The effect of these two points on the fit should be studied further before the model is released for use.</p>
+</div>
+<div id="example-5.2-the-windmill-data" class="section level1">
+<h1>Example 5.2 : The Windmill Data</h1>
+<p>A research engineer is investigating the use of a windmill to generate electricity. He has collected data on the DC Output from his windmill and the corresponding wind velocity. The data are plotted in the table and Figure 5 below.</p>
+<pre class="r"><code># load data
+ex52 &lt;- read.table(&quot;ex5-2.txt&quot;,header = T)
+head(ex52)</code></pre>
+<pre><code>##   ObservationNumber_i WindVelocity_xi_mph DCOutput_yi
+## 1                   1                 5.0       1.582
+## 2                   2                 6.0       1.822
+## 3                   3                 3.4       1.057
+## 4                   4                 2.7       0.500
+## 5                   5                10.0       2.236
+## 6                   6                 9.7       2.386</code></pre>
+<pre class="r"><code># plot
+plot(ex52$WindVelocity_xi_mph,
+     ex52$DCOutput_yi,
+     xlab = &quot;Wind Velocity, x&quot;,
+     ylab = &quot;DC Output, Y&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" alt="Plot of DC Output wind velocity x for the windmill data" width="672" />
+<p class="caption">
+Figure 5: Plot of DC Output wind velocity x for the windmill data
+</p>
+</div>
+<p>Inspection of the scatter diagram indicates that the relationship between DC output <span class="math inline">\((y)\)</span> and wind velocity <span class="math inline">\((x)\)</span> may be nonlinear. However, we initially fit a straight-line model to the data. The regression model is :</p>
+<p><span class="math display">\[\hat y=0.1309+0.2411x\]</span></p>
+<pre class="r"><code># model
+lm52 &lt;- lm(ex52$DCOutput_yi ~ ex52$WindVelocity_xi_mph, data = ex52)
+# plot 
+plot(ex52$WindVelocity_xi_mph,
+     ex52$DCOutput_yi,
+     xlab = &quot;Wind Velocity, x&quot;,
+     ylab = &quot;DC Output, Y&quot;)
+abline(lm52, col = &quot;red&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" alt="Plot of DC Output wind velocity x for the windmill data with SLM" width="672" />
+<p class="caption">
+Figure 6: Plot of DC Output wind velocity x for the windmill data with SLM
+</p>
+</div>
+<pre class="r"><code># summary (analysis of variance)
+summary(lm52)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ex52$DCOutput_yi ~ ex52$WindVelocity_xi_mph, data = ex52)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.59869 -0.14099  0.06059  0.17262  0.32184 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               0.13088    0.12599   1.039     0.31    
+## ex52$WindVelocity_xi_mph  0.24115    0.01905  12.659 7.55e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2361 on 23 degrees of freedom
+## Multiple R-squared:  0.8745, Adjusted R-squared:  0.869 
+## F-statistic: 160.3 on 1 and 23 DF,  p-value: 7.546e-12</code></pre>
+<pre class="r"><code># MSE &lt;- c(crossprod(resid(lm52)))/length(resid(lm52));MSE</code></pre>
+<p>The summary statistics for this model are <span class="math inline">\(R^2=0.8745\)</span>, and <span class="math inline">\(F_0=160.26\)</span> (the P-value is &lt;0.0001).</p>
+<pre class="r"><code># yhat and e 
+ex52$fitted &lt;- fitted(lm52)
+ex52$resid &lt;- resid(lm52)
+ex52 %&gt;% arrange(-desc(ex52$WindVelocity_xi_mph)) </code></pre>
+<pre><code>##    ObservationNumber_i WindVelocity_xi_mph DCOutput_yi    fitted       resid
+## 1                   25                2.45       0.123 0.7216899 -0.59868986
+## 2                    4                2.70       0.500 0.7819771 -0.28197708
+## 3                   11                2.90       0.653 0.8302069 -0.17720685
+## 4                    8                3.05       0.558 0.8663792 -0.30837918
+## 5                    3                3.40       1.057 0.9507813  0.10621871
+## 6                   16                3.60       1.137 0.9990111  0.13798894
+## 7                   24                3.95       1.144 1.0834132  0.06058683
+## 8                   23                4.10       1.194 1.1195855  0.07441450
+## 9                   13                4.60       1.562 1.2401599  0.32184007
+## 10                   1                5.00       1.582 1.3366195  0.24538052
+## 11                  20                5.45       1.501 1.4451365  0.05586353
+## 12                  14                5.80       1.737 1.5295386  0.20746142
+## 13                   2                6.00       1.822 1.5777683  0.24423165
+## 14                  10                6.20       1.866 1.6259981  0.24000188
+## 15                  12                6.35       1.930 1.6621705  0.26782955
+## 16                  19                7.00       1.800 1.8189172 -0.01891722
+## 17                  15                7.40       2.088 1.9153768  0.17262323
+## 18                  17                7.85       2.179 2.0238938  0.15510624
+## 19                   9                8.15       2.166 2.0962384  0.06976158
+## 20                  18                8.80       2.112 2.2529852 -0.14098518
+## 21                  21                9.10       2.303 2.3253298 -0.02232985
+## 22                   7                9.55       2.294 2.4338468 -0.13984684
+## 23                   6                9.70       2.386 2.4700192 -0.08401917
+## 24                   5               10.00       2.236 2.5423638 -0.30636383
+## 25                  22               10.20       2.310 2.5905936 -0.28059360</code></pre>
+<p>The observations are arranged in order of increasing wind speed. The residuals show a distinct pattern, that is, they move systematically from negative to positive and back to negative again as wind speed increases.</p>
+<pre class="r"><code># plot 
+plot(fitted(lm52),
+     resid(lm52),
+     ylab=TeX(r&#39;($e_i$)&#39;),
+     xlab=TeX(r&#39;($\hat{y}_i$)&#39;),
+     pch = 16);abline(0, 0,lty = 2)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>This residual plot indicates model inadequacy and implies that the linear relationship has not captured all of the information in the wind speed variable. Note that the curvature was apparent in the earlier scatter diagram, is greatly amplified in the residual plot.</p>
+<p>Clearly some other model form must be considered. We might initially consider using a quadratic model such as :</p>
+<p><span class="math display">\[y=\beta_0+\beta_1x+\beta_2x^2+\epsilon\]</span></p>
+<p>to account for the curvature. However since the quadratic model will eventually bend downward as wind speed increases, it would not be appropriate for these data. A more reasonable model for windmill data that incorporates an upper asymptote would be :</p>
+<p><span class="math display">\[y=\beta_0+\beta_1(\frac{1}{x})+\epsilon\]</span></p>
+<pre class="r"><code># transformation 
+ex52$xstar &lt;- 1/ex52$WindVelocity_xi_mph
+# transformed model 
+lm52T &lt;- lm(ex52$DCOutput_yi ~ ex52$xstar, data = ex52)
+# transformaion summary
+summary(lm52T)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ex52$DCOutput_yi ~ ex52$xstar, data = ex52)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.20547 -0.04940  0.01100  0.08352  0.12204 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.9789     0.0449   66.34   &lt;2e-16 ***
+## ex52$xstar   -6.9345     0.2064  -33.59   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.09417 on 23 degrees of freedom
+## Multiple R-squared:   0.98,  Adjusted R-squared:  0.9792 
+## F-statistic:  1128 on 1 and 23 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The fitted regression model is <span class="math display">\[\hat y=2.9789-6.9345x&#39;\]</span></p>
+<p>The summary statistics for this model are<span class="math inline">\(R^2=0.98\)</span>, and <span class="math inline">\(F_0=1128\)</span> (the p value is &lt;0.0001).</p>
+<pre class="r"><code># R-student values versus fitted values for the transformed data
+plot(fitted(lm52T),
+     rstudent(lm52T),
+     ylab=TeX(r&#39;($t_i$)&#39;),
+     xlab=TeX(r&#39;($\hat{y}_i$)&#39;),
+     pch = 16);abline(0, 0,lty = 2)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>This plot does not reveal any serious problems.</p>
+</div>
+<div id="example-5.3-the-electric-utility-data" class="section level1">
+<h1>Example 5.3 : The Electric Utility Data</h1>
+<p>We use the Box-Cox procedure to select a variance-stabilizing transformation. The values of <span class="math inline">\(SS_{Res}(\lambda)\)</span> for various values are shown in the table ..</p>
+<pre class="r"><code>boxcoxResult = boxcox(ex51$y_.kW. ~ ex51$x_.kWh., data = ex51, lambda = seq(-2,2,0.125))</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>

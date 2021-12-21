@@ -1,0 +1,191 @@
+---
+title: Diagnositic For Leverage And Influence
+author: Randi Bolt
+date: '2021-11-30'
+slug: diagnositic-for-leverage-and-influence
+categories:
+  - statistics
+tags:
+  - book problems
+  - data
+  - notes
+  - simple linear regression
+  - multiple linear regression
+  - statistics
+  - tutorial
+  - transformations
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The examples are from [this] textbook, and my class notes are [here].</p>
+</div>
+<div id="example-6.1-the-delivery-time-data" class="section level1">
+<h1>Example 6.1 The Delivery Time Data</h1>
+<pre class="r"><code># load data
+ex31 = read.table(&quot;ex31.txt&quot;,header = T)
+head(ex31)</code></pre>
+<pre><code>##   Observation Delivery_Time_y Number_of_Cases_x1 Distance_x2_.ft.
+## 1           1           16.68                  7              560
+## 2           2           11.50                  3              220
+## 3           3           12.03                  3              340
+## 4           4           14.88                  4               80
+## 5           5           13.75                  6              150
+## 6           6           18.11                  7              330</code></pre>
+<pre class="r"><code># model
+lm1 &lt;- lm(ex31$Delivery_Time_y ~ ex31$Number_of_Cases_x1 + ex31$Distance_x2_.ft., data = ex31)</code></pre>
+<pre class="r"><code># hat diagonal
+ex31$hii &lt;- hatvalues(lm1)
+head(ex31)</code></pre>
+<pre><code>##   Observation Delivery_Time_y Number_of_Cases_x1 Distance_x2_.ft.        hii
+## 1           1           16.68                  7              560 0.10180178
+## 2           2           11.50                  3              220 0.07070164
+## 3           3           12.03                  3              340 0.09873476
+## 4           4           14.88                  4               80 0.08537479
+## 5           5           13.75                  6              150 0.07501050
+## 6           6           18.11                  7              330 0.04286693</code></pre>
+<pre class="r"><code># Statistics for detecting influential observations 
+print(influence.measures(lm1))</code></pre>
+<pre><code>## Influence measures of
+##   lm(formula = ex31$Delivery_Time_y ~ ex31$Number_of_Cases_x1 +      ex31$Distance_x2_.ft., data = ex31) :
+## 
+##      dfb.1_ dfb.e31.N dfb.e31.D   dffit cov.r   cook.d    hat inf
+## 1  -0.18727   0.41131  -0.43486 -0.5709 0.871 1.00e-01 0.1018    
+## 2   0.08979  -0.04776   0.01441  0.0986 1.215 3.38e-03 0.0707    
+## 3  -0.00352   0.00395  -0.00285 -0.0052 1.276 9.46e-06 0.0987    
+## 4   0.45196   0.08828  -0.27337  0.5008 0.876 7.76e-02 0.0854    
+## 5  -0.03167  -0.01330   0.02424 -0.0395 1.240 5.43e-04 0.0750    
+## 6  -0.01468   0.00179   0.00108 -0.0188 1.200 1.23e-04 0.0429    
+## 7   0.07807  -0.02228  -0.01102  0.0790 1.240 2.17e-03 0.0818    
+## 8   0.07120   0.03338  -0.05382  0.0938 1.206 3.05e-03 0.0637    
+## 9  -2.57574   0.92874   1.50755  4.2961 0.342 3.42e+00 0.4983   *
+## 10  0.10792  -0.33816   0.34133  0.3987 1.305 5.38e-02 0.1963    
+## 11 -0.03427   0.09253  -0.00269  0.2180 1.172 1.62e-02 0.0861    
+## 12 -0.03027  -0.04867   0.05397 -0.0677 1.291 1.60e-03 0.1137    
+## 13  0.07237  -0.03562   0.01134  0.0813 1.207 2.29e-03 0.0611    
+## 14  0.04952  -0.06709   0.06182  0.0974 1.228 3.29e-03 0.0782    
+## 15  0.02228  -0.00479   0.00684  0.0426 1.192 6.32e-04 0.0411    
+## 16 -0.00269   0.06442  -0.08419 -0.0972 1.369 3.29e-03 0.1659    
+## 17  0.02886   0.00649  -0.01570  0.0339 1.219 4.01e-04 0.0594    
+## 18  0.24856   0.18973  -0.27243  0.3653 1.069 4.40e-02 0.0963    
+## 19  0.17256   0.02357  -0.09897  0.1862 1.215 1.19e-02 0.0964    
+## 20  0.16804  -0.21500  -0.09292 -0.6718 0.760 1.32e-01 0.1017    
+## 21 -0.16193  -0.29718   0.33641 -0.3885 1.238 5.09e-02 0.1653    
+## 22  0.39857  -1.02541   0.57314 -1.1950 1.398 4.51e-01 0.3916   *
+## 23 -0.15985   0.03729  -0.05265 -0.3075 0.890 2.99e-02 0.0413    
+## 24 -0.11972   0.40462  -0.46545 -0.5711 0.948 1.02e-01 0.1206    
+## 25 -0.01682   0.00085   0.00559 -0.0176 1.231 1.08e-04 0.0666</code></pre>
+<p>Column hii shows the hat diagonals for the soft drink deliver time data. Since <span class="math inline">\(p=3\)</span> and <span class="math inline">\(n=25\)</span>, any point for which the hat diagonal <span class="math inline">\(h_{ii}\)</span> exceeds <span class="math inline">\(\frac{2p}{n}=\frac{2(3)}{25}=0.24\)</span> is a leverage point. This criterion would identify observations 9 and 22 as leverage points.</p>
+<p>To illistrate the effect of these two points on the model, three additional analyses were performed; one deleting observation 9, a second deleting observation 22, and the third deleting both 9 and 22. The results are thus :</p>
+<pre class="r"><code># remove 9
+data1 &lt;- ex31[-c(9),]
+lmd1 &lt;- lm(data1$Delivery_Time_y ~ data1$Number_of_Cases_x1 + data1$Distance_x2_.ft., data = data1)
+summary(lmd1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = data1$Delivery_Time_y ~ data1$Number_of_Cases_x1 + 
+##     data1$Distance_x2_.ft., data = data1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.0325 -1.2331  0.0199  1.4730  4.8167 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)              4.447238   0.952469   4.669 0.000131 ***
+## data1$Number_of_Cases_x1 1.497691   0.130207  11.502 1.58e-10 ***
+## data1$Distance_x2_.ft.   0.010324   0.002854   3.618 0.001614 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.43 on 21 degrees of freedom
+## Multiple R-squared:  0.9487, Adjusted R-squared:  0.9438 
+## F-statistic: 194.2 on 2 and 21 DF,  p-value: 2.859e-14</code></pre>
+<pre class="r"><code># remove 22
+data2 &lt;- ex31[-c(22),]
+lmd2 &lt;- lm(data2$Delivery_Time_y ~ data2$Number_of_Cases_x1 + data2$Distance_x2_.ft., data = data2)
+summary(lmd2)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = data2$Delivery_Time_y ~ data2$Number_of_Cases_x1 + 
+##     data2$Distance_x2_.ft., data = data2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.7075 -0.9139  0.5079  1.4274  5.6756 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)              1.915740   1.105105   1.734  0.09766 .  
+## data2$Number_of_Cases_x1 1.786324   0.201762   8.854 1.56e-08 ***
+## data2$Distance_x2_.ft.   0.012369   0.003768   3.282  0.00355 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.173 on 21 degrees of freedom
+## Multiple R-squared:  0.9564, Adjusted R-squared:  0.9523 
+## F-statistic: 230.5 on 2 and 21 DF,  p-value: 5.155e-15</code></pre>
+<pre class="r"><code># remove both 9 and 22
+data3 &lt;- ex31[-c(9, 22),]
+lmd3 &lt;- lm(data3$Delivery_Time_y ~ data3$Number_of_Cases_x1 + data3$Distance_x2_.ft., data = data3)
+summary(lmd3)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = data3$Delivery_Time_y ~ data3$Number_of_Cases_x1 + 
+##     data3$Distance_x2_.ft., data = data3)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.0596 -1.2531 -0.1362  1.5153  5.1396 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)              4.642692   1.125981   4.123 0.000527 ***
+## data3$Number_of_Cases_x1 1.455607   0.180483   8.065 1.03e-07 ***
+## data3$Distance_x2_.ft.   0.010549   0.002988   3.531 0.002099 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.483 on 20 degrees of freedom
+## Multiple R-squared:  0.9072, Adjusted R-squared:  0.8979 
+## F-statistic: 97.75 on 2 and 20 DF,  p-value: 4.739e-11</code></pre>
+<p>Deleting observation 9 produces only a minor change in <span class="math inline">\(\hat\beta_1\)</span>, but results in approximately a 28% change in <span class="math inline">\(\hat\beta_2\)</span> and a 90% change in <span class="math inline">\(\hat\beta_0\)</span>. This illustrats that observation influence on the regression coefficient associated with <span class="math inline">\(x_2\)</span> (distance). In effect, observation 9 may be causing curvature in the <span class="math inline">\(x_2\)</span> direction. Deleting point 22 produces relatively smaller changes, and deleting both points produces changes similar to those observed when deleting only 9.</p>
+</div>
+<div id="example-6.2-the-delivery-time-data" class="section level1">
+<h1>Example 6.2 The Delivery Time Data</h1>
+<pre class="r"><code># Statistics for detecting influential observations 
+print(influence.measures(lm1))</code></pre>
+<pre><code>## Influence measures of
+##   lm(formula = ex31$Delivery_Time_y ~ ex31$Number_of_Cases_x1 +      ex31$Distance_x2_.ft., data = ex31) :
+## 
+##      dfb.1_ dfb.e31.N dfb.e31.D   dffit cov.r   cook.d    hat inf
+## 1  -0.18727   0.41131  -0.43486 -0.5709 0.871 1.00e-01 0.1018    
+## 2   0.08979  -0.04776   0.01441  0.0986 1.215 3.38e-03 0.0707    
+## 3  -0.00352   0.00395  -0.00285 -0.0052 1.276 9.46e-06 0.0987    
+## 4   0.45196   0.08828  -0.27337  0.5008 0.876 7.76e-02 0.0854    
+## 5  -0.03167  -0.01330   0.02424 -0.0395 1.240 5.43e-04 0.0750    
+## 6  -0.01468   0.00179   0.00108 -0.0188 1.200 1.23e-04 0.0429    
+## 7   0.07807  -0.02228  -0.01102  0.0790 1.240 2.17e-03 0.0818    
+## 8   0.07120   0.03338  -0.05382  0.0938 1.206 3.05e-03 0.0637    
+## 9  -2.57574   0.92874   1.50755  4.2961 0.342 3.42e+00 0.4983   *
+## 10  0.10792  -0.33816   0.34133  0.3987 1.305 5.38e-02 0.1963    
+## 11 -0.03427   0.09253  -0.00269  0.2180 1.172 1.62e-02 0.0861    
+## 12 -0.03027  -0.04867   0.05397 -0.0677 1.291 1.60e-03 0.1137    
+## 13  0.07237  -0.03562   0.01134  0.0813 1.207 2.29e-03 0.0611    
+## 14  0.04952  -0.06709   0.06182  0.0974 1.228 3.29e-03 0.0782    
+## 15  0.02228  -0.00479   0.00684  0.0426 1.192 6.32e-04 0.0411    
+## 16 -0.00269   0.06442  -0.08419 -0.0972 1.369 3.29e-03 0.1659    
+## 17  0.02886   0.00649  -0.01570  0.0339 1.219 4.01e-04 0.0594    
+## 18  0.24856   0.18973  -0.27243  0.3653 1.069 4.40e-02 0.0963    
+## 19  0.17256   0.02357  -0.09897  0.1862 1.215 1.19e-02 0.0964    
+## 20  0.16804  -0.21500  -0.09292 -0.6718 0.760 1.32e-01 0.1017    
+## 21 -0.16193  -0.29718   0.33641 -0.3885 1.238 5.09e-02 0.1653    
+## 22  0.39857  -1.02541   0.57314 -1.1950 1.398 4.51e-01 0.3916   *
+## 23 -0.15985   0.03729  -0.05265 -0.3075 0.890 2.99e-02 0.0413    
+## 24 -0.11972   0.40462  -0.46545 -0.5711 0.948 1.02e-01 0.1206    
+## 25 -0.01682   0.00085   0.00559 -0.0176 1.231 1.08e-04 0.0666</code></pre>
+<p>Looking at cook.d values, <span class="math inline">\(D_9=3.419318\)</span>, which indicates that deletion of observation 9 would move the least-squares estimate to approximately the boundry of a 96% confidene region around <span class="math inline">\(\hat\beta\)</span>. The next largest value is <span class="math inline">\(D_{22}=.4510455\)</span>, and deletion of point 22 will move the estimate of <span class="math inline">\(\beta\)</span> to approximately the edge of 35% confidence region.</p>
+</div>

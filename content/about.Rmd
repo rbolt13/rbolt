@@ -5,6 +5,30 @@ output: html_document
 enableEmoji : true
 ---
 
+**:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 - Current<br> _Personal_
+
+* Personal website and second blog created using blogdown and R studio, presented through a github repository. Website includes plenty of coding basics such as images, hyperlinks, bold and italicized text, headers, centered and indented text, emojis, and a footer link to my Github profile. 
+
+* Blog posts are shown chronologically on the about page, as well as sorted by tag and category. A projects page include 10 various projects, including class notes for 3 of my upper division undergraduate statistics classes.  
+
+* Currently 6 blog posts are live which include brief tutorials on R studio packages such as Jasmines, and tidy census, as well as mathematical proofs, and micro posts on simple but important mathematical and statistical concepts. 
+
+* Quick to construct, approximately one hour is spent weekly making minor adjustments to the overal blog or working on potential or existing posts. 
+
+* Future blog posts will include examples in R from simple linear regression, proving least squares estimates, blogdown tutorial, first shiny app, simple shiny tutorial, probability distributions (deep dive), tree diagrams, bayes theorem, simple g.i.s., basketball stats, and spotifyr. 
+
+**:sunny: [Rsite2](https://rbolt13.github.io/rsite2/)** <br> Summer 2021 <br> _Personal_
+
+* Inspired by riste, rsite2 is a website created mainly using R Studio, and presented on Github. Each page has a different background which was done with a very basic CSS. 
+
+* Images and text with headers are used to show / explain how I created websites like the ones I created for rsite2, rsite, and my classnotes. 
+
+* Created a 5 by 13 data frame of classical ballets, and created two visualizations using ggplot(). The first visual is a plot diagram showing ballets in chronilogical order with La Sylphide being the oldest from 1832, and Alice's Adventures in WonderLand being the newest from 2011. The second visual is a histogram showing that most ballet's have 3 acts, with a range of acts from 1 - 4. 
+
+* First homework solutions from Statistics - 451 : Applied Statistics for Engineers and Scientists, but done in r. Functions used incldue : stem(), hist(), mean(), median(), sort(), sum(), length(), sd(), sqrt(), quantile(), min(), max(), par(), and boxplot()
+
+* kableExtra() is used on Home, and Contact page. Tables include hyperlinks and are formatted, and stylized to match backgrounds. A special feature of kableExtra() also allows a row to be highlighted when selected or hovered over by cursur. 
+
 **:chart: [Rsite](https://rbolt13.github.io/rsite/index.html)** <br> Spring 2021 <br> _Portland State University_
 
 * Projects from a 300 level statistics class at Portland State University (STAT 363: Introduction to R) presented through a github repository. 
@@ -29,19 +53,24 @@ enableEmoji : true
 
 * Future plans to investigate dispensaries diversity using R Studio. 
 
-# Additional Links 
+### Undergrad Notes PSU
 
-### In Progress or Incomplete Projects
+**:bee: [Statistics - 464 : Applied Regression Analysis](https://rbolt13.github.io/stat464/)** <br> Fall 2021 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  _Professor Ge Zhao_  
 
-**:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 - Current<br> _Portland State University_
+**Topics Covered :** simple linear regression, multiple linear models, model adequacy checking, transformations and weighting to correct model inadequacies, and diagnosstics for leverage and influence 
+
+**:ant: [Statistics - 461 : Introduction to Statistics](https://rbolt13.github.io/stat461/)** <br> Fall 2021 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _Professor Dorcas Ofori-Boaten_
+
+**Topics Covered :** Mean, median, mode, variance, standard deviation, the Empirical Rule, basic properties and axioms of probabilities, set theory, DeMorgan's Law, Distributive Law, counting rules, statistical independence, mutual independence, total law of probability, Baye's Rule, discrete and continuous random variables, probability distribution, expected value, CDF, PMF, and PDF. 
+
+**:bug: [Statistics - 451 : Applied Statistics for Engineers and Scientists](https://rbolt13.github.io/stat451/)** <br> Summer 2021 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _Professor Subhash Kochar_
+
+**Topics Covered :** Discrete and continuous random variables and probability distributions, bernoulli random variables, pmf, pdf, expected value, variance, mean, standard deviation for geometric, Poisson, binomial, uniform, exponential, gamma, chi-squared, Weilbull, lognormal, standard beta density curve and normal distributions and r.v.. (This is mainly notes for chapter 3 and 4 of the text)
+
+### In Progress / Incomplete Projects
 
 **:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_
 
 **:scroll: [An Introduction to Abstract Mathematics (Notes)](https://rbolt13.github.io/itam/)** <br> Summer 2021  - Current <br> _Portland State University_
 
 **:herb: [Randi Grows](https://randigrows.netlify.app/about/)** <br> Summer 2021 <br> _Portland State University_
-
-**:sunny: [Rsite2](https://rbolt13.github.io/rsite2/)** <br> Summer 2021 <br> _Portland State University_
-
-
-

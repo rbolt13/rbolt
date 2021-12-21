@@ -1,0 +1,81 @@
+---
+title: Diagnositic For Leverage And Influence
+author: Randi Bolt
+date: '2021-11-30'
+slug: diagnositic-for-leverage-and-influence
+categories:
+  - statistics
+tags:
+  - book problems
+  - data
+  - notes
+  - simple linear regression
+  - multiple linear regression
+  - statistics
+  - tutorial
+  - transformations
+---
+
+```{r, message=FALSE, echo=F}
+# libraries
+library(latex2exp) # letex on graphs 
+library(magrittr) # %>%
+library(dplyr) # arrange
+library(MASS) # boxcox()
+```
+
+
+# Introduction 
+
+The examples are from [this] textbook, and my class notes are [here]. 
+
+# Example 6.1 The Delivery Time Data
+
+```{r}
+# load data
+ex31 = read.table("ex31.txt",header = T)
+head(ex31)
+# model
+lm1 <- lm(ex31$Delivery_Time_y ~ ex31$Number_of_Cases_x1 + ex31$Distance_x2_.ft., data = ex31)
+```
+
+```{r}
+# hat diagonal
+ex31$hii <- hatvalues(lm1)
+head(ex31)
+# Statistics for detecting influential observations 
+print(influence.measures(lm1))
+```
+
+Column hii shows the hat diagonals for the soft drink deliver time data. Since $p=3$ and $n=25$, any point for which the hat diagonal $h_{ii}$ exceeds $\frac{2p}{n}=\frac{2(3)}{25}=0.24$ is a leverage point. This criterion would identify observations 9 and 22 as leverage points. 
+
+To illistrate the effect of these two points on the model, three additional analyses were performed; one deleting observation 9, a second deleting observation 22, and the third deleting both 9 and 22. The results are thus : 
+
+```{r}
+# remove 9
+data1 <- ex31[-c(9),]
+lmd1 <- lm(data1$Delivery_Time_y ~ data1$Number_of_Cases_x1 + data1$Distance_x2_.ft., data = data1)
+summary(lmd1)
+# remove 22
+data2 <- ex31[-c(22),]
+lmd2 <- lm(data2$Delivery_Time_y ~ data2$Number_of_Cases_x1 + data2$Distance_x2_.ft., data = data2)
+summary(lmd2)
+# remove both 9 and 22
+data3 <- ex31[-c(9, 22),]
+lmd3 <- lm(data3$Delivery_Time_y ~ data3$Number_of_Cases_x1 + data3$Distance_x2_.ft., data = data3)
+summary(lmd3)
+```
+
+Deleting observation 9 produces only a minor change in $\hat\beta_1$, but results in approximately a 28% change in $\hat\beta_2$ and a 90% change in $\hat\beta_0$. This illustrats that observation influence on the regression coefficient associated with $x_2$ (distance). In effect, observation 9 may be causing curvature in the $x_2$ direction. Deleting point 22 produces relatively smaller changes, and deleting both points produces changes similar to those observed when deleting only 9. 
+
+# Example 6.2 The Delivery Time Data
+
+```{r}
+# Statistics for detecting influential observations 
+print(influence.measures(lm1))
+```
+
+Looking at cook.d values, $D_9=3.419318$, which indicates that deletion of observation 9 would move the least-squares estimate to approximately the boundry of a 96% confidene region around $\hat\beta$. The next largest value is $D_{22}=.4510455$, and deletion of point 22 will move the estimate of $\beta$ to approximately the edge of 35% confidence region. 
+
+
+
