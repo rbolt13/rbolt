@@ -17,6 +17,18 @@ enableEmoji : true
 
 * Future blog posts will include examples in R from linear regression annalysis, proving least squares estimates, blogdown tutorial, first shiny app, simple shiny tutorial, probability distributions, tree diagrams, bayes theorem, simple g.i.s., basketball stats, and spotifyr. 
 
+**:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_
+
+*
+
+*
+
+*
+
+*
+
+* 
+
 **:sunny: [Rsite2](https://rbolt13.github.io/rsite2/)** <br> Summer 2021 <br> _Personal_
 
 * Inspired by riste, rsite2 is another website created using R Studio, and presented on Github. Each page has a different background which was done with some very basic CSS. 
@@ -28,6 +40,18 @@ enableEmoji : true
 * First homework solutions from Statistics - 451 : Applied Statistics for Engineers and Scientists, but done in R Studio. Functions used include : stem(), hist(), mean(), median(), sort(), sum(), length(), sd(), sqrt(), quantile(), min(), max(), par(), and boxplot().
 
 * kableExtra() is used on Home, and Contact page. Tables include hyperlinks and are formatted, and stylized to match backgrounds. A special feature of kableExtra() also allows a row to be highlighted when selected or hovered over by cursur. 
+
+**:herb: [Randi Grows](https://randigrows.netlify.app/about/)** <br> Summer 2021 <br> _Personal_
+ 
+* 
+
+* 
+
+* 
+
+* 
+
+* 
 
 **:chart: [Rsite](https://rbolt13.github.io/rsite/index.html)** <br> Spring 2021 <br> _Portland State University_
 
@@ -53,7 +77,7 @@ enableEmoji : true
 
 * Future plans to investigate dispensaries diversity using R Studio and shiny. 
 
-### Undergrad Notes PSU
+### Undergrad Notes PSU ~ 
 
 **:bee: [Statistics - 464 : Applied Regression Analysis](https://rbolt13.github.io/stat464/)** <br> Fall 2021 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  _Professor Ge Zhao_  
 
@@ -67,10 +91,8 @@ enableEmoji : true
 
 **Topics Covered :** Discrete and continuous random variables and probability distributions, bernoulli random variables, pmf, pdf, expected value, variance, mean, standard deviation for geometric, Poisson, binomial, uniform, exponential, gamma, chi-squared, Weilbull, lognormal, standard beta density curve and normal distributions and r.v.. (This is mainly notes for chapter 3 and 4 of the text)
 
-### In Progress / Incomplete Projects
+### Book Notes ~
+**:scroll: [An Introduction to Abstract Mathematics (Notes)](https://rbolt13.github.io/itam/)** 
 
-**:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_
+**Topics Covered :** Statements, implications, contrapositives, converse, sets, subsets and collections of sets. 
 
-**:scroll: [An Introduction to Abstract Mathematics (Notes)](https://rbolt13.github.io/itam/)** <br> Summer 2021  - Current <br> _Portland State University_
-
-**:herb: [Randi Grows](https://randigrows.netlify.app/about/)** <br> Summer 2021 <br> _Portland State University_
