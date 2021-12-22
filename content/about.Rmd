@@ -15,7 +15,7 @@ enableEmoji : true
 
 * The projects page include 10 various projects, including class notes for 3 upper division undergraduate statistics classes. 
 
-* Future blog posts will include examples in R from linear regression annalysis, proving least squares estimates, blogdown tutorial, first shiny app, simple shiny tutorial, probability distributions, tree diagrams, bayes theorem, simple g.i.s., basketball stats, and spotifyr. 
+* Future blog posts will include examples in R from linear regression analysis, proving least squares estimates, blogdown tutorial, first shiny app, simple shiny tutorial, probability distributions, tree diagrams, Bayes theorem, simple g.i.s., basketball stats, and spotifyr. 
 
 **:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_
 
