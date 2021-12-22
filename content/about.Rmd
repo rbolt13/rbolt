@@ -19,7 +19,7 @@ enableEmoji : true
 
 **:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Personal_
 
-*  Created in R Studio and presented through Github repositories, 6 different data sets from NYT repository along with data from tidycensus package were used to create tables of percentages of  cases, deaths, and vaccinations for states and Oregon couties. 
+*  Created in R Studio and presented through a Github repository, 6 different data sets from NYT repository along with data from tidycensus package were used to create tables of percentages of  cases, deaths, and vaccinations for states and Oregon couties. 
 
 * The main page includes an interactive table of contents, and an API was used in .Renviron that is ignored by Github. Joined data sets, created columns for calculated percentages, filtered by date, and created "top 5" tables with gt().
 
