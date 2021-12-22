@@ -17,7 +17,7 @@ enableEmoji : true
 
 * Future blog posts will include examples in R from linear regression analysis, proving least squares estimates, blogdown tutorial, first shiny app, simple shiny tutorial, probability distributions, tree diagrams, Bayes theorem, simple g.i.s., basketball stats, and spotifyr. 
 
-**:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Portland State University_
+**:pill: [COVID-19](https://rbolt13.github.io/covid19/)** <br> Summer 2021 - Current<br> _Personal_
 
 *  Created in R Studio and presented through Github repositories, 6 different data sets from NYT repository along with data from tidycensus package were used to create tables of percentages of  cases, deaths, and vaccinations for states and Oregon couties. 
 
