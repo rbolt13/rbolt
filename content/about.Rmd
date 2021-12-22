@@ -21,11 +21,11 @@ enableEmoji : true
 
 * Inspired by riste, rsite2 is another website created using R Studio, and presented on Github. Each page has a different background which was done with some very basic CSS. 
 
-* Images and text with headers are used to show / explain how I created websites like the ones I created for rsite2, rsite, and my classnotes. 
+* Images and text with headers are used to show / explain how I created websites like the ones I created for rsite2, rsite, and my class notes. 
 
 * Created a 5 by 13 data frame of classical ballets, and with two visualizations using ggplot(). The first visual is a plot diagram showing ballets in chronological order, showing that La Sylphide is the oldest ballet from 1832, and Alice's Adventures in WonderLand being the newest from 2011. The second visual is a histogram showing that most ballet's have 3 acts with a left skew, and a range of acts from 1 - 4.
 
-* First homework solutions from Statistics - 451 : Applied Statistics for Engineers and Scientists, but done in r. Functions used incldue : stem(), hist(), mean(), median(), sort(), sum(), length(), sd(), sqrt(), quantile(), min(), max(), par(), and boxplot()
+* First homework solutions from Statistics - 451 : Applied Statistics for Engineers and Scientists, but done in R Studio. Functions used include : stem(), hist(), mean(), median(), sort(), sum(), length(), sd(), sqrt(), quantile(), min(), max(), par(), and boxplot().
 
 * kableExtra() is used on Home, and Contact page. Tables include hyperlinks and are formatted, and stylized to match backgrounds. A special feature of kableExtra() also allows a row to be highlighted when selected or hovered over by cursur. 
 
