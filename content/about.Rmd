@@ -47,17 +47,17 @@ enableEmoji : true
 
 * Formatted, organized, added classifications, and geocoded a data table of about 700 rows of data from the Oregon Liquor Control Commission’s active marijuanna retail license. 
 
-* Discovered more than half of dispensaries in Oregon are owned by a chain and about 10% of dispensaries in Portland’s Urban Growth Boundary are owned by one chain, Groundworks. 
+* Discovered more than half of dispensaries in Oregon are owned by a chain and about 10% of the 262 dispensaries in Portland’s Urban Growth Boundary are owned by one chain, Groundworks. 
 
 * Presented virtually at GIS in Action on April 22, 2021. 
 
-* Future plans to investigate dispensaries diversity using R Studio. 
+* Future plans to investigate dispensaries diversity using R Studio and shiny. 
 
 ### Undergrad Notes PSU
 
 **:bee: [Statistics - 464 : Applied Regression Analysis](https://rbolt13.github.io/stat464/)** <br> Fall 2021 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  _Professor Ge Zhao_  
 
-**Topics Covered :** simple linear regression, multiple linear models, model adequacy checking, transformations and weighting to correct model inadequacies, and diagnosstics for leverage and influence 
+**Topics Covered :** simple linear regression, least-square estimates, hypothesis testing, t-statistic, p-statistic, analysis of variance, sum of squares estimate, sum of squares regression, mean square error, confidence intervals, R squared, multiple linear models, hat matrix, Broferoni Method, Scheffe Method, multilinearity, variance inflation factor, model adequacy checking, residual analysis, residual plotting, residual scaling, PRESS statsitic, detecting outliers, transformations and weighting to correct model inadequacies, stabilizing variance, weighted least squares, diagnosstics for leverage and influence, DIFFTS, DFBETAS, and COVRATIO. 
 
 **:ant: [Statistics - 461 : Introduction to Statistics](https://rbolt13.github.io/stat461/)** <br> Fall 2021 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _Professor Dorcas Ofori-Boaten_
 
