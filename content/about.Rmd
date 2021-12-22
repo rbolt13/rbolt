@@ -7,7 +7,7 @@ enableEmoji : true
 
 **:ledger: [Personal Website](https://rbolt13.github.io/rsite/index.html)** <br> Summer 2021 - Current<br> _Personal_
 
-* Second blog and first personal website created using blogdown in R studio, and presented through a github repository. The entire website includes examples of elementary coding such as images, hyperlinks, bold and italicized text, headers, centered and indented text, emojis, and a footer signature with link to my Github profile. 
+* Second blog and first personal website created using blogdown in R studio, and presented github and netlify. The entire website includes examples of elementary coding such as images, hyperlinks, bold and italicized text, headers, centered and indented text, emojis, and a footer signature with link to my Github profile. 
 
 * Quick to construct, approximately one hour is spent weekly making minor adjustments to the overall blog or working on potential or existing posts. 
 
@@ -27,7 +27,7 @@ enableEmoji : true
 
 * Packages used : magrittr, dplyr, readr, tidyr, lubridate, pander, ggplot2, gt, kableExtra, gridExtra, and tidycenus. 
 
-* Incomplete this site serves as more of a play pen for data and data visual exploration. Future explorations might include shiny. 
+* Incomplete this site serves as more of a play pen for data and data visual exploration. Future explorations might include graphs and maps with ggplot, and potentially a shiny app. 
 
 **:sunny: [Rsite2](https://rbolt13.github.io/rsite2/)** <br> Summer 2021 <br> _Personal_
 
