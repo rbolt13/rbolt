@@ -92,7 +92,7 @@ enableEmoji : true
 **Topics Covered :** Discrete and continuous random variables and probability distributions, bernoulli random variables, pmf, pdf, expected value, variance, mean, standard deviation for geometric, Poisson, binomial, uniform, exponential, gamma, chi-squared, Weilbull, lognormal, standard beta density curve and normal distributions and r.v.. (This is mainly notes for chapter 3 and 4 of the text)
 
 ### Book Notes ~
-**:scroll: [An Introduction to Abstract Mathematics (Notes)](https://rbolt13.github.io/itam/)** 
+**:scroll: [An Introduction to Abstract Mathematics](https://rbolt13.github.io/itam/)** 
 
 **Topics Covered :** Statements, implications, contrapositives, converse, sets, subsets and collections of sets. 
 
