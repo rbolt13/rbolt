@@ -89,7 +89,7 @@ enableEmoji : true
 
 **:bug: [Statistics - 451 : Applied Statistics for Engineers and Scientists](https://rbolt13.github.io/stat451/)** <br> Summer 2021 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _Professor Subhash Kochar_
 
-**Topics Covered :** Discrete and continuous random variables and probability distributions, bernoulli random variables, pmf, pdf, expected value, variance, mean, standard deviation for geometric, Poisson, binomial, uniform, exponential, gamma, chi-squared, Weilbull, lognormal, standard beta density curve and normal distributions and r.v.. (This is mainly notes for chapter 3 and 4 of the text)
+**Topics Covered :** Discrete and continuous random variables and probability distributions, bernoulli random variables, pmf, pdf, expected value, variance, mean, standard deviation for geometric, Poisson, binomial, uniform, exponential, gamma, chi-squared, Weilbull, lognormal, standard beta density curve and normal distributions and r.v. (This is mainly notes for chapter 3 and 4 of the text).
 
 ### Book Notes ~
 **:scroll: [An Introduction to Abstract Mathematics](https://rbolt13.github.io/itam/)** 
