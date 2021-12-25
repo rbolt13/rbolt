@@ -14,6 +14,7 @@ tags:
   - tutorial
   - transformations
   - weighting to correct model inadeqacies
+draft: true
 ---
 
 ```{r, message=FALSE, echo=F}
