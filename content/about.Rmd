@@ -79,6 +79,18 @@ enableEmoji : true
 
 ### Undergrad Notes PSU ~ 
 
+**:cricket: [Statistics - 462 : Introduction to Mathematical Statistics II](https://rbolt13.github.io/stat462/)** <br> Winter 2022 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  _Professor Nadee Jayasena_  
+
+**Topics Covered :** Pending 
+
+**:lady beetle: [Mathematics - 388 : Modern College Geometry](https://rbolt13.github.io/mth388/)** <br> Winter 2022 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  _Professor Rebecca Tramel_  
+
+**Topics Covered :** Pending
+
+**:beetle: [Mathematics - 344 : Introduction to Group Theory Application](https://rbolt13.github.io/mth344/)** <br> Winter 2022 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  _Professor Julie Bracken_  
+
+**Topics Covered :** Pending
+
 **:bee: [Statistics - 464 : Applied Regression Analysis](https://rbolt13.github.io/stat464/)** <br> Fall 2021 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  _Professor Ge Zhao_  
 
 **Topics Covered :** Simple linear regression, least-square estimates, hypothesis testing, t-statistic, p-statistic, analysis of variance, sum of squares estimate, sum of squares regression, mean square error, confidence intervals, R squared, multiple linear models, hat matrix, Broferoni Method, Scheffe Method, multilinearity, variance inflation factor, model adequacy checking, residual analysis, residual plotting, residual scaling, PRESS statsitic, detecting outliers, transformations and weighting to correct model inadequacies, stabilizing variance, weighted least squares, diagnosstics for leverage and influence, DIFFTS, DFBETAS, and COVRATIO. 
