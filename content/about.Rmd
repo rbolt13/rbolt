@@ -43,15 +43,11 @@ enableEmoji : true
 
 **:herb: [Randi Grows](https://randigrows.netlify.app/about/)** <br> Summer 2021 <br> _Personal_
  
-* 
+* Read [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/), watched videos, and read articles on how to create a blog with blogdown in rstudio.
 
-* 
+* First blog in blogdown tracks my garden in written and visual posts. 
 
-* 
-
-* 
-
-* 
+* Scrapped early due to time demand of taking, uploading, and digitally filing images. 
 
 **:chart: [Rsite](https://rbolt13.github.io/rsite/index.html)** <br> Spring 2021 <br> _Portland State University_
 
