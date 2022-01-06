@@ -8,14 +8,8 @@ enableEmoji : true
 
 # Hello Beautiful Person :heart:
 
-My name is **Randi Bolt** (she/her/hers pronouns) and I am an undergraduate mathematics and statistics major at Portland State University. This is a growing portfolio created with blogdown in R Studio to demonstrate my skills, and interests in areas such as mathematics, statistics, and data science. Blog posts will mainly be in the form of bullet notes, or short summaries, whereas projects will be more formal and can be found [here](https://rbolt.netlify.app/projects/) on the Projects page. 
+My name is **Randi Bolt** and this site in no longer being updated and maintained. For my most up to date blog check out this link [here!](https://rbolt2.netlify.app/). 
 
-<center>
-
-All post are shown chronologically below, and can been seen separated out by 'Category' and 'Tags' in the respective tabs above. To learn more about my past and ongoing projects, or to get ahold of me check out the 'Projects' and 'Contact' tabs as well. 
-
-Thanks for stopping by, and please enjoy! 
-</center>
-
+Thanks for stopping by!
 
 ### Posts
